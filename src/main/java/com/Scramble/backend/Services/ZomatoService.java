@@ -8,12 +8,18 @@ import java.util.Collections;
 @Service
 public class ZomatoService {
 
+    // calls the Zomato API
+
     public Search CallSearchApi() throws Exception{
 
+        // Url
+        //TODO: stringbuilder for url to include all fields
         String url = "https://developers.zomato.com/api/v2.1/search?sort=real_distance&entity_type=zone&count=10&lat=53.022791&lon=-2.184461&radius=1000&order=asc";
 
         HttpHeaders headers = new HttpHeaders();
         RestTemplate restTemplate = new RestTemplate();
+
+        // sets headers
 
         headers.setAccept(Collections.singletonList((MediaType.APPLICATION_JSON)));
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -26,6 +32,7 @@ public class ZomatoService {
         HttpStatus statusCode = response.getStatusCode();
         System.out.println("Response Status Code: " + statusCode);
 
+        // check status
         if (statusCode == HttpStatus.OK){
             System.out.println("Results found: " + response.getBody().getResults_shown());
             return response.getBody();

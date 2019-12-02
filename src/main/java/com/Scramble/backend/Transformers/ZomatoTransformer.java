@@ -10,10 +10,13 @@ import java.util.ArrayList;
 @Component
 public class ZomatoTransformer {
 
+    // transforms API result to frontend request
+
     public ArrayList<RestaurantTr> transform(Search searchResults){
         ArrayList<RestaurantTr> transformedRes = new ArrayList<>();
         ArrayList<Restaurant> restaurants = searchResults.getRestaurants();
         int i;
+
         for (i = 0; i < restaurants.size(); i++ ) {
             RestaurantTr r = new RestaurantTr();
             r.setId(restaurants.get(i).getId());

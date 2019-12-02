@@ -48,7 +48,6 @@ public class Search {
         this.restaurants = restaurants;
     }
 
-
     public Search(){
 
     }

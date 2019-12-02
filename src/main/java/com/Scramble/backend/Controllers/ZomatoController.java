@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 
+// API endpoints for frontend
+
 @RestController
 @RequestMapping(value = "/res", produces = "application/json")
 public class ZomatoController {
