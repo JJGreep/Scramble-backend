@@ -8,26 +8,27 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
-@RequestMapping(value = "/db", produces = "application/json")
-public class DatabaseController {
+@RequestMapping(value = "/eat_groups", produces = "application/json")
+public class GroupController {
 
     @Autowired
     EatGroupRepo eatGroupRepo;
 
     @GetMapping(produces = "application/json")
     public @ResponseBody
-    List<EatGroup> findAll(){
-        return eatGroupRepo.findAll();
+    List<EatGroup> findAll(@RequestParam Optional<String> name){
+        if(name.isPresent()){
+            return eatGroupRepo.findByName(name.get());
+        }
+        else{
+            return eatGroupRepo.findAll();
+        }
     }
 
-    @GetMapping(value="/name", produces = "application/json")
-    public @ResponseBody EatGroup findByName(@PathVariable String name){
-        return eatGroupRepo.findByName(name);
-    }
-
-    @GetMapping(value="/id", produces = "application/json")
+    @GetMapping(value="/{id}", produces = "application/json")
     public @ResponseBody EatGroup findById(@PathVariable long id){
         return eatGroupRepo.findById(id);
     }

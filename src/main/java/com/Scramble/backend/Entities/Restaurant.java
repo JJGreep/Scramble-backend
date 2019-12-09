@@ -8,27 +8,22 @@ import javax.persistence.Id;
 public class Restaurant {
     @Id
     @GeneratedValue
-    private long idRestaurant;
-    private String linkApi;
+    private long id;
 
-    public Restaurant(long idRestaurant, String linkApi) {
-        this.idRestaurant = idRestaurant;
-        this.linkApi = linkApi;
+    public Restaurant(){
+
     }
 
-    public long getIdRestaurant() {
-        return idRestaurant;
+    public Restaurant(long id) {
+        this.id = id;
     }
 
-    public void setIdRestaurant(long idRestaurant) {
-        this.idRestaurant = idRestaurant;
+    public long getId() {
+        return id;
     }
 
-    public String getLinkApi() {
-        return linkApi;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public void setLinkApi(String linkApi) {
-        this.linkApi = linkApi;
-    }
 }

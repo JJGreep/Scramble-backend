@@ -1,6 +1,7 @@
 package com.Scramble.backend.Controllers;
 
 
+import com.Scramble.backend.Models.RestaurantTr;
 import com.Scramble.backend.Models.Restaurant_;
 import com.Scramble.backend.Models.Search;
 import com.Scramble.backend.Services.SingleRestaurantService;
@@ -27,10 +28,10 @@ public class SearchRestaurantsController {
     @Autowired
     private ZomatoTransformer zomatoTransformer;
 
-    @GetMapping
+    @GetMapping(produces = "application/json")
     @ResponseBody
-    public Search findAll() throws Exception {
-        return zomatoService.CallSearchApi();
+    public List<RestaurantTr> findAll() throws Exception {
+        return zomatoTransformer.Transform(zomatoService.CallSearchApi());
     }
 
     @GetMapping(value="/id", produces = "application/json")
@@ -39,6 +40,7 @@ public class SearchRestaurantsController {
         return singleRestaurantService.SearchSingleRes(id);
     }
 
+    //TODO: A way to use filter information to apply to Services (Probably in header)
 
 
 }

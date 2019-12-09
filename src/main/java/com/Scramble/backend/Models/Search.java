@@ -61,6 +61,9 @@ public class Search implements Serializable
         this.restaurants = restaurants;
     }
 
+    public Search(int resultsFound, int resultsStart, int resultsShown, List<Restaurant_> restaurants) {
+    }
+
     @JsonProperty("results_found")
     public Integer getResultsFound() {
         return resultsFound;

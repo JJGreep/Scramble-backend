@@ -1,6 +1,7 @@
 package com.Scramble.backend.Entities;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -13,31 +14,42 @@ public class Account {
     @Column
     private String email;
 
-    @ManyToMany(mappedBy = "")
+    @Column
+    private String userName;
+
+    @Column
+    private String password;
+
+    @ManyToMany
     @JoinTable(
             name = "AccountEatGroup",
             joinColumns = @JoinColumn(name = "account_id"),
             inverseJoinColumns = @JoinColumn(name = "eatGroup_id"))
-    Set<EatGroup> eatGroups;
+    List<EatGroup> eatGroups;
 
-    @Column
-    private long loginUsername;
+    @ManyToMany
+    @JoinTable(
+            name = "Favorites",
+            joinColumns = @JoinColumn(name = "account_id"),
+            inverseJoinColumns = @JoinColumn(name = "restaurant_id"))
+    List<Restaurant> favRestaurants;
 
-    @Column
-    private long favoriteIdFavorite;
-
-    @Column
-    private long historyIdHistory;
+    @ManyToMany
+    @JoinTable(
+            name = "History",
+            joinColumns = @JoinColumn(name = "account_id"),
+            inverseJoinColumns = @JoinColumn(name = "restaurant_id"))
+    List<Restaurant> history;
 
     public Account(){
     }
 
-    public Account(String email, Set<EatGroup> eatGroups, long loginUsername, long favoriteIdFavorite, long historyIdHistory) {
+    public Account(String email, List<EatGroup> eatGroups, String userName, String password, List<Restaurant> favRestaurants, List<Restaurant> history) {
         this.email = email;
         this.eatGroups = eatGroups;
-        this.loginUsername = loginUsername;
-        this.favoriteIdFavorite = favoriteIdFavorite;
-        this.historyIdHistory = historyIdHistory;
+        this.userName = userName;
+        this.favRestaurants = favRestaurants;
+        this.history = history;
     }
 
     public long getId() {
@@ -56,35 +68,41 @@ public class Account {
         this.email = email;
     }
 
-    public Set<EatGroup> getEatGroups() {
+    public List<EatGroup> getEatGroups() {
         return eatGroups;
     }
 
-    public void setEatGroups(Set<EatGroup> groups) {
+    public void setEatGroups(List<EatGroup> groups) {
         this.eatGroups = eatGroups;
     }
 
-    public long getLoginUsername() {
-        return loginUsername;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setLoginUsername(long loginUsername) {
-        this.loginUsername = loginUsername;
+    public void setUserName(String userName) { this.userName = userName; }
+
+    public String getPassword() {
+        return password;
     }
 
-    public long getFavoriteIdFavorite() {
-        return favoriteIdFavorite;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public void setFavoriteIdFavorite(long favoriteIdFavorite) {
-        this.favoriteIdFavorite = favoriteIdFavorite;
+    public List<Restaurant> getFavRestaurants() {
+        return favRestaurants;
     }
 
-    public long getHistoryIdHistory() {
-        return historyIdHistory;
+    public void setFavRestaurants(List<Restaurant> favRestaurants) {
+        this.favRestaurants = favRestaurants;
     }
 
-    public void setHistoryIdHistory(long historyIdHistory) {
-        this.historyIdHistory = historyIdHistory;
+    public List<Restaurant> getHistory() {
+        return history;
+    }
+
+    public void setHistory(List<Restaurant> history) {
+        this.history = history;
     }
 }

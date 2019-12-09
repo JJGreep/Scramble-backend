@@ -4,6 +4,7 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import java.util.Collections;
+import java.util.Objects;
 
 @Service
 public class ZomatoService {
@@ -13,7 +14,8 @@ public class ZomatoService {
     public Search CallSearchApi() throws Exception{
 
         // Url
-        //TODO: stringbuilder for url to include all fields
+        //TODO: String Builder for url to include all fields, applying filter information from front-end.
+
         String url = "https://developers.zomato.com/api/v2.1/search?sort=real_distance&entity_type=zone&count=10&lat=53.022791&lon=-2.184461&radius=1000&order=asc";
 
         HttpHeaders headers = new HttpHeaders();
@@ -34,7 +36,7 @@ public class ZomatoService {
 
         // check status
         if (statusCode == HttpStatus.OK){
-            System.out.println("Results found: " + response.getBody().getResultsShown());
+            System.out.println("Results found: " + Objects.requireNonNull(response.getBody()).getResultsShown());
 
             return response.getBody();
         }

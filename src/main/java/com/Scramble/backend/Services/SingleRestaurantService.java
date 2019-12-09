@@ -13,7 +13,6 @@ public class SingleRestaurantService {
 
     public Restaurant_ SearchSingleRes(String id) throws Exception {
 
-
         String url = "https://developers.zomato.com/api/v2.1/restaurant?res_id=" + id;
 
         HttpHeaders headers = new HttpHeaders();
@@ -40,6 +39,7 @@ public class SingleRestaurantService {
         }
         else throw new Exception("Run into Exception: " + statusCode.toString());
 
-
     }
+
+    //TODO: Way to save Restaurant in DB + relation with user in History or Favorites join-table.
 }
