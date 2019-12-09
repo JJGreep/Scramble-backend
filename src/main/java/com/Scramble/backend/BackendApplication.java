@@ -11,7 +11,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.Scramble.backend.Controllers","com.Scramble.backend.Models","com.Scramble.backend.Services","com.Scramble.backend.Transformers"})
+@ComponentScan(basePackages = {"com.Scramble.backend.Controllers","com.Scramble.backend.Models","com.Scramble.backend.Services","com.Scramble.backend.Transformers","com.Scramble.backend.Entities","com.Scramble.backend.Repositories"})
 public class BackendApplication {
 
 	public static void main(String[] args) throws Exception {

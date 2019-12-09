@@ -1,15 +1,13 @@
 package com.Scramble.backend.Controllers;
 
 
-import com.Scramble.backend.Models.RestaurantTr;
+import com.Scramble.backend.Models.Restaurant_;
 import com.Scramble.backend.Models.Search;
+import com.Scramble.backend.Services.SingleRestaurantService;
 import com.Scramble.backend.Services.ZomatoService;
 import com.Scramble.backend.Transformers.ZomatoTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +16,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/res", produces = "application/json")
-public class ZomatoController {
+public class SearchRestaurantsController {
 
     @Autowired
     private ZomatoService zomatoService;
+
+    @Autowired
+    private SingleRestaurantService singleRestaurantService;
 
     @Autowired
     private ZomatoTransformer zomatoTransformer;
@@ -31,6 +32,13 @@ public class ZomatoController {
     public Search findAll() throws Exception {
         return zomatoService.CallSearchApi();
     }
+
+    @GetMapping(value="/id", produces = "application/json")
+    @ResponseBody
+    public Restaurant_ findById(@RequestParam String id) throws Exception {
+        return singleRestaurantService.SearchSingleRes(id);
+    }
+
 
 
 }
