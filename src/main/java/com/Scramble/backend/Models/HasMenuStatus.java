@@ -1,4 +1,6 @@
+
 package com.Scramble.backend.Models;
+
 
 
 import java.io.Serializable;
@@ -16,43 +18,57 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "restaurant"
+    "delivery",
+    "takeaway"
 })
-public class Restaurant implements Serializable
+public class HasMenuStatus implements Serializable
 {
 
-    @JsonProperty("restaurant")
-    @Valid
-    private Restaurant_ restaurant;
+    @JsonProperty("delivery")
+    private Integer delivery;
+    @JsonProperty("takeaway")
+    private Integer takeaway;
     @JsonIgnore
     @Valid
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-    private final static long serialVersionUID = -12572269412027835L;
+    private final static long serialVersionUID = -8779945592045477200L;
 
     /**
      * No args constructor for use in serialization
      * 
      */
-    public Restaurant() {
+    public HasMenuStatus() {
     }
 
     /**
      * 
-     * @param restaurant
+     * @param delivery
+     * @param takeaway
      */
-    public Restaurant(Restaurant_ restaurant) {
+    public HasMenuStatus(Integer delivery, Integer takeaway) {
         super();
-        this.restaurant = restaurant;
+        this.delivery = delivery;
+        this.takeaway = takeaway;
     }
 
-    @JsonProperty("restaurant")
-    public Restaurant_ getRestaurant() {
-        return restaurant;
+    @JsonProperty("delivery")
+    public Integer getDelivery() {
+        return delivery;
     }
 
-    @JsonProperty("restaurant")
-    public void setRestaurant(Restaurant_ restaurant) {
-        this.restaurant = restaurant;
+    @JsonProperty("delivery")
+    public void setDelivery(Integer delivery) {
+        this.delivery = delivery;
+    }
+
+    @JsonProperty("takeaway")
+    public Integer getTakeaway() {
+        return takeaway;
+    }
+
+    @JsonProperty("takeaway")
+    public void setTakeaway(Integer takeaway) {
+        this.takeaway = takeaway;
     }
 
     @JsonAnyGetter
@@ -67,7 +83,7 @@ public class Restaurant implements Serializable
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(restaurant).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(delivery).append(additionalProperties).append(takeaway).toHashCode();
     }
 
     @Override
@@ -75,11 +91,11 @@ public class Restaurant implements Serializable
         if (other == this) {
             return true;
         }
-        if ((other instanceof Restaurant) == false) {
+        if ((other instanceof HasMenuStatus) == false) {
             return false;
         }
-        Restaurant rhs = ((Restaurant) other);
-        return new EqualsBuilder().append(restaurant, rhs.restaurant).append(additionalProperties, rhs.additionalProperties).isEquals();
+        HasMenuStatus rhs = ((HasMenuStatus) other);
+        return new EqualsBuilder().append(delivery, rhs.delivery).append(additionalProperties, rhs.additionalProperties).append(takeaway, rhs.takeaway).isEquals();
     }
 
 }

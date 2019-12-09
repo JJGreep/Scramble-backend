@@ -1,8 +1,9 @@
-package com.Scramble.backend.Models;
 
+package com.Scramble.backend.Models;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.validation.Valid;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
@@ -16,43 +17,43 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "restaurant"
+    "reviews"
 })
-public class Restaurant implements Serializable
+public class AllReviews implements Serializable
 {
 
-    @JsonProperty("restaurant")
+    @JsonProperty("reviews")
     @Valid
-    private Restaurant_ restaurant;
+    private List<Object> reviews = null;
     @JsonIgnore
     @Valid
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-    private final static long serialVersionUID = -12572269412027835L;
+    private final static long serialVersionUID = 2289568315825540017L;
 
     /**
      * No args constructor for use in serialization
      * 
      */
-    public Restaurant() {
+    public AllReviews() {
     }
 
     /**
      * 
-     * @param restaurant
+     * @param reviews
      */
-    public Restaurant(Restaurant_ restaurant) {
+    public AllReviews(List<Object> reviews) {
         super();
-        this.restaurant = restaurant;
+        this.reviews = reviews;
     }
 
-    @JsonProperty("restaurant")
-    public Restaurant_ getRestaurant() {
-        return restaurant;
+    @JsonProperty("reviews")
+    public List<Object> getReviews() {
+        return reviews;
     }
 
-    @JsonProperty("restaurant")
-    public void setRestaurant(Restaurant_ restaurant) {
-        this.restaurant = restaurant;
+    @JsonProperty("reviews")
+    public void setReviews(List<Object> reviews) {
+        this.reviews = reviews;
     }
 
     @JsonAnyGetter
@@ -67,7 +68,7 @@ public class Restaurant implements Serializable
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(restaurant).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(reviews).append(additionalProperties).toHashCode();
     }
 
     @Override
@@ -75,11 +76,11 @@ public class Restaurant implements Serializable
         if (other == this) {
             return true;
         }
-        if ((other instanceof Restaurant) == false) {
+        if ((other instanceof AllReviews) == false) {
             return false;
         }
-        Restaurant rhs = ((Restaurant) other);
-        return new EqualsBuilder().append(restaurant, rhs.restaurant).append(additionalProperties, rhs.additionalProperties).isEquals();
+        AllReviews rhs = ((AllReviews) other);
+        return new EqualsBuilder().append(reviews, rhs.reviews).append(additionalProperties, rhs.additionalProperties).isEquals();
     }
 
 }

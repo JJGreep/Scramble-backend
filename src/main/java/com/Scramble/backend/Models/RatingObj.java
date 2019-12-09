@@ -1,6 +1,7 @@
 package com.Scramble.backend.Models;
 
 
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,43 +17,59 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "restaurant"
+    "title",
+    "bg_color"
 })
-public class Restaurant implements Serializable
+public class RatingObj implements Serializable
 {
 
-    @JsonProperty("restaurant")
+    @JsonProperty("title")
     @Valid
-    private Restaurant_ restaurant;
+    private Title title;
+    @JsonProperty("bg_color")
+    @Valid
+    private BgColor bgColor;
     @JsonIgnore
     @Valid
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-    private final static long serialVersionUID = -12572269412027835L;
+    private final static long serialVersionUID = -8332879949121991284L;
 
     /**
      * No args constructor for use in serialization
      * 
      */
-    public Restaurant() {
+    public RatingObj() {
     }
 
     /**
      * 
-     * @param restaurant
+     * @param bgColor
+     * @param title
      */
-    public Restaurant(Restaurant_ restaurant) {
+    public RatingObj(Title title, BgColor bgColor) {
         super();
-        this.restaurant = restaurant;
+        this.title = title;
+        this.bgColor = bgColor;
     }
 
-    @JsonProperty("restaurant")
-    public Restaurant_ getRestaurant() {
-        return restaurant;
+    @JsonProperty("title")
+    public Title getTitle() {
+        return title;
     }
 
-    @JsonProperty("restaurant")
-    public void setRestaurant(Restaurant_ restaurant) {
-        this.restaurant = restaurant;
+    @JsonProperty("title")
+    public void setTitle(Title title) {
+        this.title = title;
+    }
+
+    @JsonProperty("bg_color")
+    public BgColor getBgColor() {
+        return bgColor;
+    }
+
+    @JsonProperty("bg_color")
+    public void setBgColor(BgColor bgColor) {
+        this.bgColor = bgColor;
     }
 
     @JsonAnyGetter
@@ -67,7 +84,7 @@ public class Restaurant implements Serializable
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(restaurant).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(additionalProperties).append(title).append(bgColor).toHashCode();
     }
 
     @Override
@@ -75,11 +92,11 @@ public class Restaurant implements Serializable
         if (other == this) {
             return true;
         }
-        if ((other instanceof Restaurant) == false) {
+        if ((other instanceof RatingObj) == false) {
             return false;
         }
-        Restaurant rhs = ((Restaurant) other);
-        return new EqualsBuilder().append(restaurant, rhs.restaurant).append(additionalProperties, rhs.additionalProperties).isEquals();
+        RatingObj rhs = ((RatingObj) other);
+        return new EqualsBuilder().append(additionalProperties, rhs.additionalProperties).append(title, rhs.title).append(bgColor, rhs.bgColor).isEquals();
     }
 
 }

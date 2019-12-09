@@ -1,6 +1,7 @@
 package com.Scramble.backend.Models;
 
 
+
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,43 +17,58 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "restaurant"
+    "has_menu_status",
+    "res_id"
 })
-public class Restaurant implements Serializable
+public class R implements Serializable
 {
 
-    @JsonProperty("restaurant")
+    @JsonProperty("has_menu_status")
     @Valid
-    private Restaurant_ restaurant;
+    private HasMenuStatus hasMenuStatus;
+    @JsonProperty("res_id")
+    private Integer resId;
     @JsonIgnore
     @Valid
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-    private final static long serialVersionUID = -12572269412027835L;
+    private final static long serialVersionUID = 7117993748489450287L;
 
     /**
      * No args constructor for use in serialization
      * 
      */
-    public Restaurant() {
+    public R() {
     }
 
     /**
      * 
-     * @param restaurant
+     * @param hasMenuStatus
+     * @param resId
      */
-    public Restaurant(Restaurant_ restaurant) {
+    public R(HasMenuStatus hasMenuStatus, Integer resId) {
         super();
-        this.restaurant = restaurant;
+        this.hasMenuStatus = hasMenuStatus;
+        this.resId = resId;
     }
 
-    @JsonProperty("restaurant")
-    public Restaurant_ getRestaurant() {
-        return restaurant;
+    @JsonProperty("has_menu_status")
+    public HasMenuStatus getHasMenuStatus() {
+        return hasMenuStatus;
     }
 
-    @JsonProperty("restaurant")
-    public void setRestaurant(Restaurant_ restaurant) {
-        this.restaurant = restaurant;
+    @JsonProperty("has_menu_status")
+    public void setHasMenuStatus(HasMenuStatus hasMenuStatus) {
+        this.hasMenuStatus = hasMenuStatus;
+    }
+
+    @JsonProperty("res_id")
+    public Integer getResId() {
+        return resId;
+    }
+
+    @JsonProperty("res_id")
+    public void setResId(Integer resId) {
+        this.resId = resId;
     }
 
     @JsonAnyGetter
@@ -67,7 +83,7 @@ public class Restaurant implements Serializable
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(restaurant).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(hasMenuStatus).append(additionalProperties).append(resId).toHashCode();
     }
 
     @Override
@@ -75,11 +91,11 @@ public class Restaurant implements Serializable
         if (other == this) {
             return true;
         }
-        if ((other instanceof Restaurant) == false) {
+        if ((other instanceof R) == false) {
             return false;
         }
-        Restaurant rhs = ((Restaurant) other);
-        return new EqualsBuilder().append(restaurant, rhs.restaurant).append(additionalProperties, rhs.additionalProperties).isEquals();
+        R rhs = ((R) other);
+        return new EqualsBuilder().append(hasMenuStatus, rhs.hasMenuStatus).append(additionalProperties, rhs.additionalProperties).append(resId, rhs.resId).isEquals();
     }
 
 }

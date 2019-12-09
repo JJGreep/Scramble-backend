@@ -16,43 +16,42 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "restaurant"
+    "text"
 })
-public class Restaurant implements Serializable
+public class Title implements Serializable
 {
 
-    @JsonProperty("restaurant")
-    @Valid
-    private Restaurant_ restaurant;
+    @JsonProperty("text")
+    private String text;
     @JsonIgnore
     @Valid
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-    private final static long serialVersionUID = -12572269412027835L;
+    private final static long serialVersionUID = -1983958617044569285L;
 
     /**
      * No args constructor for use in serialization
      * 
      */
-    public Restaurant() {
+    public Title() {
     }
 
     /**
      * 
-     * @param restaurant
+     * @param text
      */
-    public Restaurant(Restaurant_ restaurant) {
+    public Title(String text) {
         super();
-        this.restaurant = restaurant;
+        this.text = text;
     }
 
-    @JsonProperty("restaurant")
-    public Restaurant_ getRestaurant() {
-        return restaurant;
+    @JsonProperty("text")
+    public String getText() {
+        return text;
     }
 
-    @JsonProperty("restaurant")
-    public void setRestaurant(Restaurant_ restaurant) {
-        this.restaurant = restaurant;
+    @JsonProperty("text")
+    public void setText(String text) {
+        this.text = text;
     }
 
     @JsonAnyGetter
@@ -67,7 +66,7 @@ public class Restaurant implements Serializable
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(restaurant).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(text).append(additionalProperties).toHashCode();
     }
 
     @Override
@@ -75,11 +74,11 @@ public class Restaurant implements Serializable
         if (other == this) {
             return true;
         }
-        if ((other instanceof Restaurant) == false) {
+        if ((other instanceof Title) == false) {
             return false;
         }
-        Restaurant rhs = ((Restaurant) other);
-        return new EqualsBuilder().append(restaurant, rhs.restaurant).append(additionalProperties, rhs.additionalProperties).isEquals();
+        Title rhs = ((Title) other);
+        return new EqualsBuilder().append(text, rhs.text).append(additionalProperties, rhs.additionalProperties).isEquals();
     }
 
 }

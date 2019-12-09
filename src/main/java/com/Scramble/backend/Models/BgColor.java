@@ -1,5 +1,5 @@
-package com.Scramble.backend.Models;
 
+package com.Scramble.backend.Models;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -16,43 +16,57 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "restaurant"
+    "type",
+    "tint"
 })
-public class Restaurant implements Serializable
+public class BgColor implements Serializable
 {
 
-    @JsonProperty("restaurant")
-    @Valid
-    private Restaurant_ restaurant;
+    @JsonProperty("type")
+    private String type;
+    @JsonProperty("tint")
+    private String tint;
     @JsonIgnore
     @Valid
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
-    private final static long serialVersionUID = -12572269412027835L;
+    private final static long serialVersionUID = 7384962830438418244L;
 
     /**
      * No args constructor for use in serialization
      * 
      */
-    public Restaurant() {
+    public BgColor() {
     }
 
     /**
      * 
-     * @param restaurant
+     * @param type
+     * @param tint
      */
-    public Restaurant(Restaurant_ restaurant) {
+    public BgColor(String type, String tint) {
         super();
-        this.restaurant = restaurant;
+        this.type = type;
+        this.tint = tint;
     }
 
-    @JsonProperty("restaurant")
-    public Restaurant_ getRestaurant() {
-        return restaurant;
+    @JsonProperty("type")
+    public String getType() {
+        return type;
     }
 
-    @JsonProperty("restaurant")
-    public void setRestaurant(Restaurant_ restaurant) {
-        this.restaurant = restaurant;
+    @JsonProperty("type")
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    @JsonProperty("tint")
+    public String getTint() {
+        return tint;
+    }
+
+    @JsonProperty("tint")
+    public void setTint(String tint) {
+        this.tint = tint;
     }
 
     @JsonAnyGetter
@@ -67,7 +81,7 @@ public class Restaurant implements Serializable
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(restaurant).append(additionalProperties).toHashCode();
+        return new HashCodeBuilder().append(additionalProperties).append(type).append(tint).toHashCode();
     }
 
     @Override
@@ -75,11 +89,11 @@ public class Restaurant implements Serializable
         if (other == this) {
             return true;
         }
-        if ((other instanceof Restaurant) == false) {
+        if ((other instanceof BgColor) == false) {
             return false;
         }
-        Restaurant rhs = ((Restaurant) other);
-        return new EqualsBuilder().append(restaurant, rhs.restaurant).append(additionalProperties, rhs.additionalProperties).isEquals();
+        BgColor rhs = ((BgColor) other);
+        return new EqualsBuilder().append(additionalProperties, rhs.additionalProperties).append(type, rhs.type).append(tint, rhs.tint).isEquals();
     }
 
 }

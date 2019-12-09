@@ -34,7 +34,8 @@ public class ZomatoService {
 
         // check status
         if (statusCode == HttpStatus.OK){
-            System.out.println("Results found: " + response.getBody().getResults_shown());
+            System.out.println("Results found: " + response.getBody().getResultsShown());
+
             return response.getBody();
         }
         else throw new Exception("Run into Execption: " + statusCode.toString());
