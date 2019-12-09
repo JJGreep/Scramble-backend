@@ -10,6 +10,10 @@ public class RestaurantTr {
     String cuisines;
     Integer price_range;
 
+    public RestaurantTr() {
+
+    }
+
     public String getId() {
         return id;
     }
@@ -50,9 +54,6 @@ public class RestaurantTr {
         this.price_range = price_range;
     }
 
-    public RestaurantTr(){
-
-    }
 
     public RestaurantTr(String id, String name, String url, String cuisines, Integer price_range) {
         this.id = id;

@@ -1,22 +1,19 @@
 package com.Scramble.backend.Services;
+
+import com.Scramble.backend.Models.Restaurant_;
 import com.Scramble.backend.Models.Search;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
 import java.util.Collections;
-import java.util.Objects;
 
 @Service
-public class ZomatoService {
+public class SingleRestaurantService {
 
-    // calls the Zomato API
+    public Restaurant_ SearchSingleRes(String id) throws Exception {
 
-    public Search CallSearchApi() throws Exception{
-
-        // Url
-        //TODO: String Builder for url to include all fields, applying filter information from front-end.
-
-        String url = "https://developers.zomato.com/api/v2.1/search?sort=real_distance&entity_type=zone&count=10&lat=53.022791&lon=-2.184461&radius=1000&order=asc";
+        String url = "https://developers.zomato.com/api/v2.1/restaurant?res_id=" + id;
 
         HttpHeaders headers = new HttpHeaders();
         RestTemplate restTemplate = new RestTemplate();
@@ -27,24 +24,22 @@ public class ZomatoService {
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.set("user-key", "a71057b41a6526cec5e3cc053ad34915" );
 
-        HttpEntity<Search> entity = new HttpEntity<>(headers);
+        HttpEntity<Restaurant_> entity = new HttpEntity<>(headers);
 
-        ResponseEntity<Search> response = restTemplate.exchange(url,HttpMethod.GET, entity, Search.class);
+        ResponseEntity<Restaurant_> response = restTemplate.exchange(url, HttpMethod.GET, entity, Restaurant_.class);
 
         HttpStatus statusCode = response.getStatusCode();
         System.out.println("Response Status Code: " + statusCode);
 
         // check status
         if (statusCode == HttpStatus.OK){
-            System.out.println("Results found: " + Objects.requireNonNull(response.getBody()).getResultsShown());
+            System.out.println("Result found: " + response.getBody().getName());
 
             return response.getBody();
         }
-        else throw new Exception("Run into Execption: " + statusCode.toString());
+        else throw new Exception("Run into Exception: " + statusCode.toString());
 
     }
 
-
-
-
+    //TODO: Way to save Restaurant in DB + relation with user in History or Favorites join-table.
 }
