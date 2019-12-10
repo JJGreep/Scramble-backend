@@ -1,7 +1,7 @@
 package com.Scramble.backend.Entities;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 public class EatGroup {
@@ -14,7 +14,7 @@ public class EatGroup {
     private String name;
 
     @ManyToMany(mappedBy = "eatGroups")
-    Set<Account> accounts;
+    List<Account> accounts;
 
     public EatGroup(){}
 

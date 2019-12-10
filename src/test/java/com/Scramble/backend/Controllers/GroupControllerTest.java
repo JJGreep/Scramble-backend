@@ -34,45 +34,45 @@ class GroupControllerTest {
     private GroupController groupController;
 
 
-    @Test
-    void findById() throws Exception {
-        //Given
-        given(eatGroupRepo.findById(1))
-                .willReturn(new EatGroup(1,"Test"));
-
-        //When
-        MockHttpServletResponse response = mvc.perform(
-                get("/eat_groups/1")
-                        .accept(MediaType.APPLICATION_JSON))
-                .andReturn().getResponse();
-
-        //Then
-        assertEquals(response.getStatus(),HttpStatus.OK);
-        assertEquals(response.getContentAsString(),jsonEatGroup.write(new EatGroup(1,"Test")));
-
-    }
-
 //    @Test
-//    void findByName() throws Exception {
+//    void findById() throws Exception {
 //        //Given
-//
-//        given(eatGroupRepo.findByName("EtenRoffa"))
-//                .willReturn(new List< {
-//
-//
-//
-//                });
+//        given(eatGroupRepo.findById(1))
+//                .willReturn(new EatGroup(1,"Test"));
 //
 //        //When
 //        MockHttpServletResponse response = mvc.perform(
-//                get("/db/EtenRoffa")
+//                get("/eat_groups/1")
 //                        .accept(MediaType.APPLICATION_JSON))
 //                .andReturn().getResponse();
 //
 //        //Then
 //        assertEquals(response.getStatus(),HttpStatus.OK);
-//        assertEquals(response.getContentAsString(),jsonEatGroup.write(new EatGroup(1,"EtenRoffa")));
+//        assertEquals(response.getContentAsString(),jsonEatGroup.write(new EatGroup(1,"Test")));
 //
 //    }
+//
+////    @Test
+////    void findByName() throws Exception {
+////        //Given
+////
+////        given(eatGroupRepo.findByName("EtenRoffa"))
+////                .willReturn(new List< {
+////
+////
+////
+////                });
+////
+////        //When
+////        MockHttpServletResponse response = mvc.perform(
+////                get("/db/EtenRoffa")
+////                        .accept(MediaType.APPLICATION_JSON))
+////                .andReturn().getResponse();
+////
+////        //Then
+////        assertEquals(response.getStatus(),HttpStatus.OK);
+////        assertEquals(response.getContentAsString(),jsonEatGroup.write(new EatGroup(1,"EtenRoffa")));
+////
+////    }
 
 }
