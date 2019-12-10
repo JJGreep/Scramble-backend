@@ -18,16 +18,16 @@ public class AccountController {
 
 
     //TODO: Get Account info with username and password.
-//    @GetMapping(produces = "application/json")
-//    @ResponseBody
-//    public List<Account> findAll(@RequestParam Optional<String> userName){
-//        if(userName.isPresent()){
-//            return accountRepo.findByUserName(userName.get());
-//        }
-//        else{
-//            return accountRepo.findAll();
-//        }
-//    }
+    @GetMapping(produces = "application/json")
+    @ResponseBody
+    public List<Account> findAll(@RequestParam Optional<String> userName){
+        if(userName.isPresent()){
+            return accountRepo.findByUserName(userName.get());
+        }
+        else{
+            return accountRepo.findAll();
+        }
+    }
 
     @GetMapping(value = "/{id}", produces = "application/json")
     @ResponseBody
