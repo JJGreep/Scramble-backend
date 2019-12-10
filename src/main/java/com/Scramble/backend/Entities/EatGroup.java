@@ -38,4 +38,12 @@ public class EatGroup {
     public void setName(String name) {
         this.name = name;
     }
+
+    public List<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
+    }
 }
