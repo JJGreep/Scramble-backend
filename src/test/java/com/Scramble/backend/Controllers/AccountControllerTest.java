@@ -34,7 +34,7 @@ public class AccountControllerTest {
 //        List<Restaurant> hist = new ArrayList<Restaurant>();
 //
 //        given(accountRepo.findById((long) 1))
-//                .willReturn(new Account("test@test.nl",  groups, "Test", "test", favs, hist));
+//                .willReturn(java.util.Optional.of(new Account("test@test.nl", groups, "Test", "test", favs, hist)));
 //
 //        //When
 //        MockHttpServletResponse response = mvc.perform(
@@ -46,4 +46,15 @@ public class AccountControllerTest {
 //        assertEquals(response.getStatus(), HttpStatus.OK);
 //        assertEquals(response.getContentAsString(), jsonAccount.write(new Account("test@test.nl",  groups, "Test", "test", favs, hist)));
 //    }
+
+    @Test
+    void createAccount() throws Exception {
+        //Given
+
+
+        //When
+
+
+        //Then
+    }
 }

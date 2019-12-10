@@ -21,34 +21,28 @@ public class Account {
     private String password;
 
     @ManyToMany
-    @JoinTable(
-            name = "account_eat_group",
-            joinColumns = @JoinColumn(name = "account_id"),
-            inverseJoinColumns = @JoinColumn(name = "eat_group_id"))
+    @JoinTable(name = "account_eat_group", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "eat_group_id"))
     List<EatGroup> eatGroups;
 
     @ManyToMany
-    @JoinTable(
-            name = "favorites",
-            joinColumns = @JoinColumn(name = "account_id"),
-            inverseJoinColumns = @JoinColumn(name = "restaurant_id"))
+    @JoinTable(name = "favorites", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "restaurant_id"))
     List<RestaurantDb> favRestaurantDbs;
 
     @ManyToMany
-    @JoinTable(
-            name = "history",
-            joinColumns = @JoinColumn(name = "account_id"),
-            inverseJoinColumns = @JoinColumn(name = "restaurant_id"))
+    @JoinTable(name = "history", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "restaurant_id"))
     List<RestaurantDb> history;
 
-    public Account(){
+    public Account() {
     }
 
-    public Account(String email, List<EatGroup> eatGroups, String userName, String password, List<RestaurantDb> favRestaurantDbs, List<RestaurantDb> history) {
+    public Account(String email, List<EatGroup> eatGroups, String userName, String password,
+            List<RestaurantDb> favRestaurantDbs, List<RestaurantDb> history) {
         this.email = email;
         this.eatGroups = eatGroups;
         this.userName = userName;
         this.favRestaurantDbs = favRestaurantDbs;
+        this.password = password;
+
         this.history = history;
     }
 
@@ -80,7 +74,9 @@ public class Account {
         return userName;
     }
 
-    public void setUserName(String userName) { this.userName = userName; }
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     public String getPassword() {
         return password;
