@@ -49,6 +49,7 @@ public class Account {
         this.email = email;
         this.eatGroups = eatGroups;
         this.userName = userName;
+        this.password = password;
         this.favRestaurants = favRestaurants;
         this.history = history;
     }
