@@ -1,30 +1,17 @@
 package com.Scramble.backend.Controllers;
 
 import com.Scramble.backend.Entities.Account;
-import com.Scramble.backend.Entities.EatGroup;
-import com.Scramble.backend.Entities.Restaurant;
 import com.Scramble.backend.Repositories.AccountRepo;
-import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.json.JacksonTester;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.mockito.BDDMockito.given;
 
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc

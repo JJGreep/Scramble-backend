@@ -3,18 +3,20 @@ package com.Scramble.backend.Entities;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-public class Restaurant {
+@Table(name = "restaurant")
+public class RestaurantDb {
     @Id
     @GeneratedValue
     private long id;
 
-    public Restaurant(){
+    public RestaurantDb(){
 
     }
 
-    public Restaurant(long id) {
+    public RestaurantDb(long id) {
         this.id = id;
     }
 
