@@ -22,7 +22,7 @@ public class AccountController {
 //    @ResponseBody
 //    public List<Account> findAll(@RequestParam Optional<String> userName){
 //        if(userName.isPresent()){
-//            return accountRepo.findByName(userName.get());
+//            return accountRepo.findByUserName(userName.get());
 //        }
 //        else{
 //            return accountRepo.findAll();

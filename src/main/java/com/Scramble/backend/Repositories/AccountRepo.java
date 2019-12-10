@@ -9,6 +9,6 @@ import java.util.List;
 @Repository
 public interface AccountRepo extends CrudRepository<Account, Long> {
 
-    List<Account> findByName(String Name);
+    List<Account> findByUserName(String userName);
     List<Account> findAll();
 }

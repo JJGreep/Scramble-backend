@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
+@Table
 public class Account {
     @Id
     @GeneratedValue
@@ -22,9 +23,9 @@ public class Account {
 
     @ManyToMany
     @JoinTable(
-            name = "AccountEatGroup",
+            name = "account_eat_Group",
             joinColumns = @JoinColumn(name = "account_id"),
-            inverseJoinColumns = @JoinColumn(name = "eatGroup_id"))
+            inverseJoinColumns = @JoinColumn(name = "eat_group_id"))
     List<EatGroup> eatGroups;
 
     @ManyToMany
