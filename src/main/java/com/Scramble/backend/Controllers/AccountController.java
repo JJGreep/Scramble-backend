@@ -64,7 +64,7 @@ public class AccountController {
         account.setEatGroups(account.getEatGroups());
         account.setUserName(account.getUserName());
         account.setPassword(account.getPassword());
-        account.setFavRestaurants(account.getFavRestaurants());
+        account.setFavRestaurantDbs(account.getFavRestaurantDbs());
         account.setHistory(account.getHistory());
         final Account updatedAccount = accountRepo.save(account);
         return ResponseEntity.ok(updatedAccount);
@@ -79,7 +79,7 @@ public class AccountController {
      */
     @DeleteMapping("/accounts/{id}")
     public Map<String, Boolean> deleteAccount(@PathVariable(value = "id") Long id) {
-        Account account = accountRepo.findbyId(id)
+        Account account = accountRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found on :: " + id));
         accountRepo.delete(account);
         Map<String, Boolean> response = new HashMap<>();

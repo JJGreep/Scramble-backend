@@ -2,6 +2,7 @@ package com.Scramble.backend.Controllers;
 
 import com.Scramble.backend.Entities.Account;
 import com.Scramble.backend.Repositories.AccountRepo;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
