@@ -79,7 +79,7 @@ public class AccountController {
      */
     @DeleteMapping("/accounts/{id}")
     public Map<String, Boolean> deleteAccount(@PathVariable(value = "id") Long id) {
-        Account account = accountRepo.findbyId(id)
+        Account account = accountRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found on :: " + id));
         accountRepo.delete(account);
         Map<String, Boolean> response = new HashMap<>();
