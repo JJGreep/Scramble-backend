@@ -70,4 +70,26 @@ public class AccountControllerTest {
 
         //Then
     }
+
+    @Test
+    void updateAccount() throws Exception {
+        //Given
+
+
+        //When
+
+
+        //Then
+    }
+
+    @Test
+    void deleteAccount() throws Exception {
+        //Given
+
+
+        //When
+
+
+        //Then
+    }
 }
