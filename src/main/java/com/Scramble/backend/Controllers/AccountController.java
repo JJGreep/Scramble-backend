@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-
 @RestController
 @RequestMapping(value = "/accounts", produces = "application/json")
 public class AccountController {
@@ -20,15 +19,13 @@ public class AccountController {
     @Autowired
     private AccountRepo accountRepo;
 
-
-    //TODO: Get Account info with username and password.
+    // TODO: Get Account info with username and password.
     @GetMapping(produces = "application/json")
     @ResponseBody
-    public List<Account> findAllAccounts(@RequestParam Optional<String> userName){
-        if(userName.isPresent()){
+    public List<Account> findAllAccounts(@RequestParam Optional<String> userName) {
+        if (userName.isPresent()) {
             return accountRepo.findByUserName(userName.get());
-        }
-        else{
+        } else {
             return accountRepo.findAll();
         }
     }
@@ -53,17 +50,16 @@ public class AccountController {
     /**
      * Update user response entity.
      *
-     * @param id the user id
+     * @param id             the user id
      * @param accountDetails the user details
      * @return the response entity
      * @throws RuntimeException the resource not found exception
      */
     @PutMapping("/accounts/{id}")
-    public ResponseEntity<Account> updateAccount(@PathVariable(value = "id") Long id, @Valid @RequestBody Account accountDetails){
-        Account account =
-                accountRepo
-                    .findById(id)
-                    .orElseThrow(() -> new RuntimeException("User not found on :: " + id));
+    public ResponseEntity<Account> updateAccount(@PathVariable(value = "id") Long id,
+            @Valid @RequestBody Account accountDetails) {
+        Account account = accountRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found on :: " + id));
         account.setEmail(account.getEmail());
         account.setEatGroups(account.getEatGroups());
         account.setUserName(account.getUserName());
@@ -82,16 +78,15 @@ public class AccountController {
      * @throws RuntimeException the exception
      */
     @DeleteMapping("/accounts/{id}")
-    public Map<String, Boolean> deleteAccount(@PathVariable(value = "id") Long id){
-        Account account =
-                accountRepo
-                    .findbyId(id)
-                    .orElseThrow(() -> new RuntimeException("User not found on :: " + id));
+    public Map<String, Boolean> deleteAccount(@PathVariable(value = "id") Long id) {
+        Account account = accountRepo.findbyId(id)
+                .orElseThrow(() -> new RuntimeException("User not found on :: " + id));
         accountRepo.delete(account);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
         return response;
     }
 
-    //TODO: Possibly separate Controllers for History and Favorites, using id from Account (Sessions?).
+    // TODO: Possibly separate Controllers for History and Favorites, using id from
+    // Account (Sessions?).
 }

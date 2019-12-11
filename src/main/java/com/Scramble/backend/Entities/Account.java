@@ -2,7 +2,6 @@ package com.Scramble.backend.Entities;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table
@@ -22,35 +21,28 @@ public class Account {
     private String password;
 
     @ManyToMany
-    @JoinTable(
-            name = "account_eat_Group",
-            joinColumns = @JoinColumn(name = "account_id"),
-            inverseJoinColumns = @JoinColumn(name = "eat_group_id"))
+    @JoinTable(name = "account_eat_group", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "eat_group_id"))
     List<EatGroup> eatGroups;
 
     @ManyToMany
-    @JoinTable(
-            name = "Favorites",
-            joinColumns = @JoinColumn(name = "account_id"),
-            inverseJoinColumns = @JoinColumn(name = "restaurant_id"))
-    List<Restaurant> favRestaurants;
+    @JoinTable(name = "favorites", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "restaurant_id"))
+    List<RestaurantDb> favRestaurantDbs;
 
     @ManyToMany
-    @JoinTable(
-            name = "History",
-            joinColumns = @JoinColumn(name = "account_id"),
-            inverseJoinColumns = @JoinColumn(name = "restaurant_id"))
-    List<Restaurant> history;
+    @JoinTable(name = "history", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "restaurant_id"))
+    List<RestaurantDb> history;
 
-    public Account(){
+    public Account() {
     }
 
-    public Account(String email, List<EatGroup> eatGroups, String userName, String password, List<Restaurant> favRestaurants, List<Restaurant> history) {
+    public Account(String email, List<EatGroup> eatGroups, String userName, String password,
+            List<RestaurantDb> favRestaurantDbs, List<RestaurantDb> history) {
         this.email = email;
         this.eatGroups = eatGroups;
         this.userName = userName;
+        this.favRestaurantDbs = favRestaurantDbs;
         this.password = password;
-        this.favRestaurants = favRestaurants;
+
         this.history = history;
     }
 
@@ -82,7 +74,9 @@ public class Account {
         return userName;
     }
 
-    public void setUserName(String userName) { this.userName = userName; }
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     public String getPassword() {
         return password;
@@ -92,19 +86,19 @@ public class Account {
         this.password = password;
     }
 
-    public List<Restaurant> getFavRestaurants() {
-        return favRestaurants;
+    public List<RestaurantDb> getFavRestaurantDbs() {
+        return favRestaurantDbs;
     }
 
-    public void setFavRestaurants(List<Restaurant> favRestaurants) {
-        this.favRestaurants = favRestaurants;
+    public void setFavRestaurantDbs(List<RestaurantDb> favRestaurantDbs) {
+        this.favRestaurantDbs = favRestaurantDbs;
     }
 
-    public List<Restaurant> getHistory() {
+    public List<RestaurantDb> getHistory() {
         return history;
     }
 
-    public void setHistory(List<Restaurant> history) {
+    public void setHistory(List<RestaurantDb> history) {
         this.history = history;
     }
 }
