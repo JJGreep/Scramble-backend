@@ -23,21 +23,21 @@ public class Account {
 
     @ManyToMany
     @JoinTable(
-            name = "account_eat_Group",
+            name = "account_eat_group",
             joinColumns = @JoinColumn(name = "account_id"),
             inverseJoinColumns = @JoinColumn(name = "eat_group_id"))
     List<EatGroup> eatGroups;
 
     @ManyToMany
     @JoinTable(
-            name = "Favorites",
+            name = "favorites",
             joinColumns = @JoinColumn(name = "account_id"),
             inverseJoinColumns = @JoinColumn(name = "restaurant_id"))
     List<Restaurant> favRestaurants;
 
     @ManyToMany
     @JoinTable(
-            name = "History",
+            name = "history",
             joinColumns = @JoinColumn(name = "account_id"),
             inverseJoinColumns = @JoinColumn(name = "restaurant_id"))
     List<Restaurant> history;
