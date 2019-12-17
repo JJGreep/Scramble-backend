@@ -29,9 +29,9 @@ public class GroupController {
 
     @RequestMapping(produces = "application/json", method = GET)
     public @ResponseBody
-    List<EatGroup> findAll(@RequestParam Optional<String> name){
-        if(name.isPresent()){
-            return eatGroupRepo.findByName(name.get());
+    List<EatGroup> findAll(@RequestParam String name){
+        if(name != null && name != ""){
+            return eatGroupRepo.findByName(name);
         }
         else{
             return eatGroupRepo.findAll();
@@ -42,7 +42,7 @@ public class GroupController {
     public @ResponseBody EatGroup findById(@PathVariable long id){
 
         return eatGroupRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found on :: " + id));
+                .orElseThrow(() -> new RuntimeException("Group not found on :: " + id));
     }
 
     /**
@@ -70,7 +70,7 @@ public class GroupController {
         EatGroup group =
                 eatGroupRepo
                         .findById(id)
-                        .orElseThrow(() -> new RuntimeException("User not found on :: " + id));
+                        .orElseThrow(() -> new RuntimeException("Group not found on :: " + id));
         group.setName(group.getName());
         group.setAccounts(group.getAccounts());
         final EatGroup updatedGroup = eatGroupRepo.save(group);
@@ -89,7 +89,7 @@ public class GroupController {
         EatGroup group =
                 eatGroupRepo
                     .findById(id)
-                    .orElseThrow(() -> new RuntimeException("User not found on :: " + id));
+                    .orElseThrow(() -> new RuntimeException("Group not found on :: " + id));
         eatGroupRepo.delete(group);
     }
 
