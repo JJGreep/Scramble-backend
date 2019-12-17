@@ -4,6 +4,7 @@ import com.Scramble.backend.Entities.*;
 
 
 import java.util.List;
+import java.util.Objects;
 
 public class AccountTr {
     private long id;
@@ -72,5 +73,23 @@ public class AccountTr {
 
     public void setHistory(List<RestaurantDb> history) {
         this.history = history;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof AccountTr)) return false;
+        AccountTr accountTr = (AccountTr) o;
+        return getId() == accountTr.getId() &&
+                Objects.equals(getEmail(), accountTr.getEmail()) &&
+                Objects.equals(getUserName(), accountTr.getUserName()) &&
+                Objects.equals(getEatGroups(), accountTr.getEatGroups()) &&
+                Objects.equals(favRestaurants, accountTr.favRestaurants) &&
+                Objects.equals(getHistory(), accountTr.getHistory());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getEmail(), getUserName(), getEatGroups(), favRestaurants, getHistory());
     }
 }

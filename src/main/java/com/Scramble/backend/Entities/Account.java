@@ -2,6 +2,7 @@ package com.Scramble.backend.Entities;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table
@@ -22,15 +23,15 @@ public class Account {
 
     @ManyToMany
     @JoinTable(name = "account_eat_group", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "eat_group_id"))
-    List<EatGroup> eatGroups;
+    private List<EatGroup> eatGroups;
 
     @ManyToMany
     @JoinTable(name = "favorites", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "restaurant_id"))
-    List<RestaurantDb> favRestaurantDbs;
+    private List<RestaurantDb> favRestaurantDbs;
 
     @ManyToMany
     @JoinTable(name = "history", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "restaurant_id"))
-    List<RestaurantDb> history;
+    private List<RestaurantDb> history;
 
     public Account() {
     }
@@ -44,6 +45,25 @@ public class Account {
         this.password = password;
 
         this.history = history;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Account)) return false;
+        Account account = (Account) o;
+        return getId() == account.getId() &&
+                Objects.equals(getEmail(), account.getEmail()) &&
+                Objects.equals(getUserName(), account.getUserName()) &&
+                Objects.equals(getPassword(), account.getPassword()) &&
+                Objects.equals(getEatGroups(), account.getEatGroups()) &&
+                Objects.equals(getFavRestaurantDbs(), account.getFavRestaurantDbs()) &&
+                Objects.equals(getHistory(), account.getHistory());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getEmail(), getUserName(), getPassword(), getEatGroups(), getFavRestaurantDbs(), getHistory());
     }
 
     public long getId() {
@@ -66,7 +86,7 @@ public class Account {
         return eatGroups;
     }
 
-    public void setEatGroups(List<EatGroup> groups) {
+    public void setEatGroups(List<EatGroup> eatGroups) {
         this.eatGroups = eatGroups;
     }
 

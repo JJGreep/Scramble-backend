@@ -16,7 +16,7 @@ public class ZomatoService {
         // Url
         //TODO: String Builder for url to include all fields, applying filter information from front-end.
 
-        String url = "https://developers.zomato.com/api/v2.1/search?sort=real_distance&entity_type=zone&count=10&lat=53.022791&lon=-2.184461&radius=1000&order=asc";
+        String url = "https://developers.zomato.com/api/v2.1/search?sort=real_distance&entity_type=zone&count=10&lat=42.054026&lon=-72.557066&radius=1000&order=asc";
 
         HttpHeaders headers = new HttpHeaders();
         RestTemplate restTemplate = new RestTemplate();

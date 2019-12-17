@@ -2,6 +2,7 @@ package com.Scramble.backend.Entities;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class EatGroup {
@@ -21,6 +22,21 @@ public class EatGroup {
     public EatGroup(long id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof EatGroup)) return false;
+        EatGroup eatGroup = (EatGroup) o;
+        return getId() == eatGroup.getId() &&
+                Objects.equals(getName(), eatGroup.getName()) &&
+                Objects.equals(getAccounts(), eatGroup.getAccounts());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getName(), getAccounts());
     }
 
     public long getId() {

@@ -32,6 +32,7 @@ public class ZomatoTransformer {
             r.setUrl(restaurants_.get(j).getUrl());
             r.setCuisines(restaurants_.get(j).getCuisines());
             r.setPrice_range(restaurants_.get(j).getPriceRange());
+            r.setPhoto_url(restaurants_.get(j).getFeaturedImage());
             transformedRes.add(r);
         }
         return transformedRes;
