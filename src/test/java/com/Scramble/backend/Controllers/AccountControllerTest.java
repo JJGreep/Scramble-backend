@@ -49,7 +49,7 @@ public class AccountControllerTest {
 //    }
 
     @Test
-    void createAccount() throws Exception {
+    void testCreateAccount() throws Exception {
         //Given
 
 
@@ -60,7 +60,7 @@ public class AccountControllerTest {
     }
 
     @Test
-    void updateAccount() throws Exception {
+    void testUpdateAccount() throws Exception {
         //Given
 
 
@@ -71,7 +71,7 @@ public class AccountControllerTest {
     }
 
     @Test
-    void deleteAccount() throws Exception {
+    void testDeleteAccount() throws Exception {
         //Given
 
 

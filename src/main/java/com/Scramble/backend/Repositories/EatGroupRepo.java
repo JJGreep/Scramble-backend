@@ -12,6 +12,5 @@ interface EatGroupRepo extends CrudRepository<EatGroup, Long> {
 
     List<EatGroup> findByName(String name);
     List<EatGroup> findAll();
-    EatGroup findById(long id);
 
 }
