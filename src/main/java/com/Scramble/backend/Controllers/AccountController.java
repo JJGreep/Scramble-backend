@@ -16,15 +16,18 @@ import java.util.Optional;
 @RequestMapping(value = "/accounts", produces = "application/json")
 public class AccountController {
 
-    @Autowired
-    private AccountRepo accountRepo;
+    final AccountRepo accountRepo;
+
+    public AccountController(AccountRepo accountRepo) {
+        this.accountRepo = accountRepo;
+    }
 
     // TODO: Get Account info with username and password.
     @GetMapping(produces = "application/json")
     @ResponseBody
-    public List<Account> findAllAccounts(@RequestParam Optional<String> userName) {
-        if (userName.isPresent()) {
-            return accountRepo.findByUserName(userName.get());
+    public List<Account> findAllAccounts(@RequestParam String userName) {
+        if (userName != null && userName != "") {
+            return accountRepo.findByUserName(userName);
         } else {
             return accountRepo.findAll();
         }
