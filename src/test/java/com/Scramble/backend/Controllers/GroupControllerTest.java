@@ -21,7 +21,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
-class GroupControllerTest {
+class EatGroupControllerTest {
 
     private MockMvc mvc;
     private RequestBuilder requestBuilder;
@@ -31,7 +31,7 @@ class GroupControllerTest {
     private EatGroupRepo eatGroupRepo;
 
     @InjectMocks
-    private GroupController groupController;
+    private EatGroupController eatGroupController;
 
 
     @Test
