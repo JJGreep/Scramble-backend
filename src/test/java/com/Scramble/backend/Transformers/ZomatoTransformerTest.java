@@ -45,6 +45,8 @@ class ZomatoTransformerTest {
 
         assertThat(result,hasSize(1));
         //assertThat(result,hasItem(new RestaurantTr("1","McDonalds","http://example.com","Italian",30)));
+
+        //nonsense comment added, travis wouldn't pick new commits
     }
 
 }
