@@ -10,9 +10,17 @@ language: java
 #
 #services:
 #  - postgresql
-branches:
-  only:
-    - master
+
+addons:
+  sonarcloud:
+    organization: "scrambleminor" # the key of the org you chose at step #3
+script:
+  # other script steps might be done before running the actual analysis
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=JJGreep_Scramble-backend
+
+#branches:
+#  only:
+#    - master
 
 before_install:
   - chmod +x mvnw
