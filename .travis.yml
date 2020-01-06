@@ -10,9 +10,10 @@ language: java
 #
 #services:
 #  - postgresql
-only:
-  - master
-  
+branches:
+  only:
+    - master
+
 before_install:
   - chmod +x mvnw
 
