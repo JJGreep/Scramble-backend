@@ -30,8 +30,11 @@ public class EatGroupController {
 
     @GetMapping(value="/{id}", produces = "application/json")
     public @ResponseBody
-    EatGroup findById(@PathVariable long id){
-        return eatGroupRepo.findById(id);
+    EatGroup findById(@PathVariable long id) throws Exception {
+       if(eatGroupRepo.findById(id).isPresent()){
+           return eatGroupRepo.findById(id).get();
+       }
+       else throw new Exception("No item found with that Id!");
     }
 
     @PostMapping(value="/load")
