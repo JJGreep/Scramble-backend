@@ -31,7 +31,7 @@ public class EatGroupController {
     @GetMapping(value="/{id}", produces = "application/json")
     public @ResponseBody
     EatGroup findById(@PathVariable long id){
-        return eatGroupRepo.findById(id).get();
+        return eatGroupRepo.findById(id);
     }
 
     @PostMapping(value="/load")

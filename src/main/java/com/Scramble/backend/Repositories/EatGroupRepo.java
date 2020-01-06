@@ -12,6 +12,7 @@ import java.util.List;
 public
 interface EatGroupRepo extends CrudRepository<EatGroup, Long> {
 
+    EatGroup findById(long id);
     List<EatGroup> findByName(String name);
     List<EatGroup> findAll();
 
