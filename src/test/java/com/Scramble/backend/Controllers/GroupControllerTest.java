@@ -2,77 +2,102 @@ package com.Scramble.backend.Controllers;
 
 import com.Scramble.backend.Entities.EatGroup;
 import com.Scramble.backend.Repositories.EatGroupRepo;
+import org.junit.Rule;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.json.JacksonTester;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.mock.web.MockHttpServletResponse;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.RequestBuilder;
+import org.mockito.junit.MockitoJUnit;
+import org.mockito.junit.MockitoRule;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
-@RunWith(SpringRunner.class)
-@AutoConfigureMockMvc
-class EatGroupControllerTest {
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-    private MockMvc mvc;
-    private RequestBuilder requestBuilder;
-    private JacksonTester<EatGroup> jsonEatGroup;
+@ExtendWith(MockitoExtension.class)
+class GroupControllerTest {
 
     @Mock
     private EatGroupRepo eatGroupRepo;
 
-    @InjectMocks
-    private EatGroupController eatGroupController;
+    @Rule
+    public MockitoRule mockitoRule = MockitoJUnit.rule();
 
 
     @Test
-    void findById() throws Exception {
+    void testFindById() throws Exception {
         //Given
-        given(eatGroupRepo.findById(1))
-                .willReturn(new EatGroup(1,"Test"));
+        GroupController groupController = new GroupController(eatGroupRepo);
+        EatGroup group = new EatGroup(0, "Javaanse Strijders");
+        when(eatGroupRepo.findById(0L)).thenReturn(Optional.of(group));
 
         //When
-        MockHttpServletResponse response = mvc.perform(
-                get("/eat_groups/1")
-                        .accept(MediaType.APPLICATION_JSON))
-                .andReturn().getResponse();
+        groupController.findById(0L);
 
         //Then
-        assertEquals(response.getStatus(),HttpStatus.OK);
-        assertEquals(response.getContentAsString(),jsonEatGroup.write(new EatGroup(1,"Test")));
-
+        verify(eatGroupRepo).findById(0L);
     }
 
-//    @Test
-//    void findByName() throws Exception {
-//        //Given
-//
-//        given(eatGroupRepo.findByName("EtenRoffa"))
-//                .willReturn(new List< {
-//
-//
-//
-//                });
-//
-//        //When
-//        MockHttpServletResponse response = mvc.perform(
-//                get("/db/EtenRoffa")
-//                        .accept(MediaType.APPLICATION_JSON))
-//                .andReturn().getResponse();
-//
-//        //Then
-//        assertEquals(response.getStatus(),HttpStatus.OK);
-//        assertEquals(response.getContentAsString(),jsonEatGroup.write(new EatGroup(1,"EtenRoffa")));
-//
-//    }
+    @Test
+    void testFindAll() throws Exception{
+        //Given
+        GroupController groupController = new GroupController(eatGroupRepo);
+        List<EatGroup> groupList = new ArrayList<EatGroup>();
+        EatGroup group1 = new EatGroup(0, "Javaanse Strijders");
+        EatGroup group2 = new EatGroup(1, "PokoLoco");
+        groupList.add(group1);
+        groupList.add(group2);
+        //when(eatGroupRepo.findByName("PokoLoco")).thenReturn(groupList);
+        when(eatGroupRepo.findAll()).thenReturn(groupList);
+
+        //When
+        groupController.findAll("");
+
+        //Then
+        verify(eatGroupRepo).findAll();
+    }
+
+    @Test
+    void testCreateGroup() throws Exception{
+        //Given
+        GroupController groupController = new GroupController(eatGroupRepo);
+
+        //When
+        EatGroup group = groupController.createGroup(new EatGroup(0L, "Javaanse Strijders"));
+
+        //Then
+        verify(eatGroupRepo).save(group);
+    }
+
+    @Test
+    void testUpdateGroup() throws Exception{
+        //Given
+        GroupController groupController = new GroupController(eatGroupRepo);
+        EatGroup group = new EatGroup(0, "Javaanse Strijders");
+        when(eatGroupRepo.findById(0L)).thenReturn(Optional.of(group));
+
+        //When
+        groupController.updateGroup(0L, group);
+
+        //Then
+        verify(eatGroupRepo).save(group);
+    }
+
+    @Test
+    void testDeleteGroup() throws Exception{
+        //Given
+        GroupController groupController = new GroupController(eatGroupRepo);
+        EatGroup group = new EatGroup(0, "Javaanse Strijders");
+        when(eatGroupRepo.findById(0L)).thenReturn(Optional.of(group));
+
+        //When
+        groupController.deleteGroup(0L);
+
+        //Then
+        verify(eatGroupRepo).delete(group);
+    }
 
 }

@@ -1,7 +1,8 @@
 package com.Scramble.backend.Entities;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class EatGroup {
@@ -14,13 +15,28 @@ public class EatGroup {
     private String name;
 
     @ManyToMany(mappedBy = "eatGroups")
-    Set<Account> accounts;
+    List<Account> accounts;
 
     public EatGroup(){}
 
     public EatGroup(long id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof EatGroup)) return false;
+        EatGroup eatGroup = (EatGroup) o;
+        return getId() == eatGroup.getId() &&
+                Objects.equals(getName(), eatGroup.getName()) &&
+                Objects.equals(getAccounts(), eatGroup.getAccounts());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getName(), getAccounts());
     }
 
     public long getId() {
@@ -37,5 +53,13 @@ public class EatGroup {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(List<Account> accounts) {
+        this.accounts = accounts;
     }
 }

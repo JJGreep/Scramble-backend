@@ -1,0 +1,19 @@
+# ignore all property and SQL files
+.properties
+.sql
+.jar
+.war
+.ear
+
+# ignore everything in target folder
+target/
+
+# ignore IntelliJ files
+**/*.iml
+**/*.idea
+**/*.gradle
+
+# ignore Eclipse files
+**/.project
+**/.classpath
+**/.settings/
