@@ -1,4 +1,16 @@
 language: java
+sudo: enabled
+
+addons:
+  postgresql: "9.6" // change "9.5" for your postgres specific version
+
+before_script:
+  - psql -c "create database aries;" -U scrambledb // your database name
+  - sudo -u postgres psql -c "ALTER ROLE postgres WITH password '0885087'"
+
+services:
+  - postgresql
+
 before_install:
   - chmod +x mvnw
 
