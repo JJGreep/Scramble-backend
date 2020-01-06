@@ -35,10 +35,6 @@ public class AccountTransformer {
         accountTr.setFavRestaurantsDb(account.getFavRestaurantDbs());
         accountTr.setHistory(account.getHistory());
         accountTr.setUserName(account.getUserName());
-
-
-
-
         return accountTr;
     }
 }
