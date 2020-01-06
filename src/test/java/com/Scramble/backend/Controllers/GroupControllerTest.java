@@ -14,6 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -65,12 +68,16 @@ class GroupControllerTest {
     void testCreateGroup() throws Exception{
         //Given
         GroupController groupController = new GroupController(eatGroupRepo);
+        EatGroup newEatGroup = new EatGroup(0L, "Javaanse Strijders");
 
+        when(eatGroupRepo.save(newEatGroup)).thenReturn(newEatGroup);
         //When
-        EatGroup group = groupController.createGroup(new EatGroup(0L, "Javaanse Strijders"));
+
+        EatGroup group = groupController.createGroup(newEatGroup);
 
         //Then
         verify(eatGroupRepo).save(group);
+        assertThat(group,is(equalTo(newEatGroup)));
     }
 
     @Test
