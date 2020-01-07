@@ -26,7 +26,7 @@ public class AccountController {
     @GetMapping(produces = "application/json")
     @ResponseBody
     public List<Account> findAllAccounts(@RequestParam String userName) {
-        if (userName != null && userName != "") {
+        if (userName != null && !userName.isEmpty()) {
             return accountRepo.findByUserName(userName);
         } else {
             return accountRepo.findAll();
@@ -63,12 +63,12 @@ public class AccountController {
             @Valid @RequestBody Account accountDetails) {
         Account account = accountRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found on :: " + id));
-        account.setEmail(account.getEmail());
-        account.setEatGroups(account.getEatGroups());
-        account.setUserName(account.getUserName());
-        account.setPassword(account.getPassword());
-        account.setFavRestaurantDbs(account.getFavRestaurantDbs());
-        account.setHistory(account.getHistory());
+        account.setEmail(accountDetails.getEmail());
+        account.setEatGroups(accountDetails.getEatGroups());
+        account.setUserName(accountDetails.getUserName());
+        account.setPassword(accountDetails.getPassword());
+        account.setFavRestaurantDbs(accountDetails.getFavRestaurantDbs());
+        account.setHistory(accountDetails.getHistory());
         final Account updatedAccount = accountRepo.save(account);
         return ResponseEntity.ok(updatedAccount);
     }

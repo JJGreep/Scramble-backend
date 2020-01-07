@@ -3,9 +3,11 @@ package com.Scramble.backend.Controllers;
 import com.Scramble.backend.Entities.EatGroup;
 import com.Scramble.backend.Repositories.EatGroupRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,11 +19,16 @@ public class EatGroupController {
     @Autowired
     EatGroupRepo eatGroupRepo;
 
+    public EatGroupController(EatGroupRepo eatGroupRepo) {
+        this.eatGroupRepo = eatGroupRepo;
+    }
+
+
     @GetMapping(value="/all",produces = "application/json")
     public @ResponseBody
-    List<EatGroup> findAll(@RequestParam Optional<String> name){
-        if(name.isPresent()){
-            return eatGroupRepo.findByName(name.get());
+    List<EatGroup> findAll(@RequestParam String name){
+        if(name != null && !name.isEmpty()){
+            return eatGroupRepo.findByName(name);
         }
         else{
             return eatGroupRepo.findAll();
@@ -31,16 +38,63 @@ public class EatGroupController {
     @GetMapping(value="/{id}", produces = "application/json")
     public @ResponseBody
     EatGroup findById(@PathVariable long id) throws Exception {
-       if(eatGroupRepo.findById(id).isPresent()){
-           return eatGroupRepo.findById(id).get();
+        Optional<EatGroup> optEatGroup = eatGroupRepo.findById(id);
+       if( optEatGroup.isPresent()){
+           return optEatGroup.get();
        }
        else throw new Exception("No item found with that Id!");
     }
+    /**
+     * Create group group.
+     *
+     * @param eatGroup the group
+     * @return the group
+     */
 
-    @PostMapping(value="/load")
-    public EatGroup load(@RequestBody final EatGroup eatgroup) {
-        eatGroupRepo.save(eatgroup);
-        return (EatGroup) eatGroupRepo.findByName(eatgroup.getName());
+    @PostMapping(value="/createGroup")
+    public ResponseEntity<EatGroup> createGroup(@Valid @RequestBody final EatGroup eatGroup) {
+        final EatGroup createdGroup = eatGroupRepo.save(eatGroup);
+        return ResponseEntity.ok(createdGroup);
     }
+    /**
+     * Update group response entity.
+     *
+     * @param id the user id
+     * @param groupDetails the group details
+     * @return the response entity
+     * @throws RuntimeException the resource not found exception
+     */
+
+    @PutMapping(value= "/updateGroup/{id}")
+    public ResponseEntity<EatGroup> updateGroup(
+            @PathVariable(value = "id") Long id, @Valid @RequestBody EatGroup groupDetails){
+        EatGroup group =
+                eatGroupRepo
+                        .findById(id)
+                        .orElseThrow(() -> new RuntimeException("Group not found on :: " + id));
+        group.setName(groupDetails.getName());
+        group.setAccounts(groupDetails.getAccounts());
+        final EatGroup updatedGroup = eatGroupRepo.save(group);
+        return ResponseEntity.ok(updatedGroup);
+    }
+    /**
+     * Delete group map.
+     *
+     * @param id the group id
+     * @return the map
+     * @throws RuntimeException the exception
+     */
+
+    @DeleteMapping(value="/deleteGroup/{id}")
+    public @ResponseBody void deleteGroup(@PathVariable(value = "id") Long id) {
+        EatGroup group =
+                eatGroupRepo
+                        .findById(id)
+                        .orElseThrow(() -> new RuntimeException("Group not found on :: " + id));
+        eatGroupRepo.delete(group);
+    }
+
+
+
 
 }
