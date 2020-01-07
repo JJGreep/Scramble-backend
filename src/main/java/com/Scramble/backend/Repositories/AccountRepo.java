@@ -11,5 +11,6 @@ import java.util.Optional;
 public interface AccountRepo extends CrudRepository<Account, Long> {
 
     List<Account> findByUserName(String userName);
+    List<Account> findByConfirmationToken(String confirmationToken);
     List<Account> findAll();
 }
