@@ -52,9 +52,8 @@ public class EatGroupController {
      */
 
     @PostMapping(value="/createGroup")
-    public ResponseEntity<EatGroup> createGroup(@Valid @RequestBody final EatGroup eatGroup) {
-        final EatGroup createdGroup = eatGroupRepo.save(eatGroup);
-        return ResponseEntity.ok(createdGroup);
+    public EatGroup createGroup(@Valid @RequestBody final EatGroup eatGroup) {
+        return eatGroupRepo.save(eatGroup);
     }
     /**
      * Update group response entity.

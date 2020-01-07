@@ -73,10 +73,10 @@ class EatGroupControllerTest {
         when(eatGroupRepo.save(newEatGroup)).thenReturn(newEatGroup);
         //When
 
-        ResponseEntity<EatGroup> eatGroup = eatGroupController.createGroup(newEatGroup);
+        EatGroup eatGroup = eatGroupController.createGroup(newEatGroup);
 
         //Then
-        verify(eatGroupRepo).save(newEatGroup);
+        verify(eatGroupRepo).save(eatGroup);
         assertThat(eatGroup,is(equalTo(newEatGroup)));
     }
 
