@@ -1,5 +1,7 @@
 package com.Scramble.backend.Entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
@@ -21,6 +23,7 @@ public class Account {
     @Column
     private String password;
 
+    @JsonBackReference
     @ManyToMany
     @JoinTable(name = "account_eat_group", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "eat_group_id"))
     private List<EatGroup> eatGroups;

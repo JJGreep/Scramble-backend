@@ -29,7 +29,7 @@ class AccountTransformerTest {
         AccountTr account_transformed2 = new AccountTr();
         List<AccountTr> accountTrList = new ArrayList<AccountTr>();
 
-        eatGroup.setId(1);
+        eatGroup.setId(1L);
         eatGroup.setName("testgroup");
         eatGroupsList.add(eatGroup);
         account.setId(1);
@@ -68,7 +68,7 @@ class AccountTransformerTest {
         List<RestaurantDb> restaurantDbs = new ArrayList<>();
         AccountTransformer accountTransformer = new AccountTransformer();
 
-        eatGroup.setId(1);
+        eatGroup.setId(1L);
         eatGroup.setName("testgroup");
         eatGroupsList.add(eatGroup);
         account.setId(1);

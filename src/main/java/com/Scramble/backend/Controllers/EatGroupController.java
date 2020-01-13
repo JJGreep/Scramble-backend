@@ -1,6 +1,7 @@
 package com.Scramble.backend.Controllers;
 
 import com.Scramble.backend.Entities.EatGroup;
+import com.Scramble.backend.Models.CreateEatGroup;
 import com.Scramble.backend.Repositories.EatGroupRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -44,17 +45,21 @@ public class EatGroupController {
        }
        else throw new Exception("No item found with that Id!");
     }
-    /**
-     * Create group group.
-     *
-     * @param eatGroup the group
-     * @return the group
-     */
 
-    @PostMapping(value="/createGroup")
-    public EatGroup createGroup(@Valid @RequestBody final EatGroup eatGroup) {
-        return eatGroupRepo.save(eatGroup);
+    /**
+     *
+     * @param createEatGroup
+     * @return
+     */
+    @PostMapping(value="/createGroup", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<EatGroup> createGroup(@RequestBody final CreateEatGroup createEatGroup) {
+        EatGroup eatgroup = new EatGroup();
+        eatgroup.setName(createEatGroup.getName());
+        EatGroup returnedEatGroup = eatGroupRepo.save(eatgroup);
+        System.out.println(returnedEatGroup);
+        return ResponseEntity.ok(returnedEatGroup);
     }
+
     /**
      * Update group response entity.
      *
@@ -63,7 +68,6 @@ public class EatGroupController {
      * @return the response entity
      * @throws RuntimeException the resource not found exception
      */
-
     @PutMapping(value= "/updateGroup/{id}")
     public ResponseEntity<EatGroup> updateGroup(
             @PathVariable(value = "id") Long id, @Valid @RequestBody EatGroup groupDetails){

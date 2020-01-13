@@ -1,6 +1,7 @@
 package com.Scramble.backend.Controllers;
 
 import com.Scramble.backend.Entities.EatGroup;
+import com.Scramble.backend.Models.CreateEatGroup;
 import com.Scramble.backend.Repositories.EatGroupRepo;
 import org.junit.Rule;
 import org.junit.jupiter.api.Test;
@@ -9,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +19,7 @@ import java.util.Optional;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -67,16 +70,18 @@ class EatGroupControllerTest {
     void testCreateGroup() throws Exception{
         //Given
         EatGroupController eatGroupController = new EatGroupController(eatGroupRepo);
-        EatGroup newEatGroup = new EatGroup(0L, "Javaanse Strijders");
+        CreateEatGroup createEatGroup = new CreateEatGroup("Javaanse Strijders");
 
-        when(eatGroupRepo.save(newEatGroup)).thenReturn(newEatGroup);
+        EatGroup eatgroup = new EatGroup(0,"Javaanse Strijders");
+
+        when(eatGroupRepo.save(any(EatGroup.class))).thenReturn(eatgroup);
         //When
 
-        EatGroup eatGroup = eatGroupController.createGroup(newEatGroup);
+        ResponseEntity<EatGroup> eatGroup = eatGroupController.createGroup(createEatGroup);
 
         //Then
-        verify(eatGroupRepo).save(eatGroup);
-        assertThat(eatGroup,is(equalTo(newEatGroup)));
+        verify(eatGroupRepo).save(any(EatGroup.class));
+        assertThat(eatGroup.getBody(),is(equalTo(eatgroup)));
     }
 
     @Test
