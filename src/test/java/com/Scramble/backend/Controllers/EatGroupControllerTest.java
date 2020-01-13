@@ -9,7 +9,6 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,12 +33,12 @@ class EatGroupControllerTest {
     @Test
     void testFindById() throws Exception {
         //Given
-        EatGroupController groupController = new EatGroupController(eatGroupRepo);
+        EatGroupController eatGroupController = new EatGroupController(eatGroupRepo);
         EatGroup group = new EatGroup(0, "Javaanse Strijders");
         when(eatGroupRepo.findById(0L)).thenReturn(Optional.of(group));
 
         //When
-        groupController.findById(0L);
+        eatGroupController.findById(0L);
 
         //Then
         verify(eatGroupRepo).findById(0L);
@@ -48,7 +47,7 @@ class EatGroupControllerTest {
     @Test
     void testFindAll() throws Exception{
         //Given
-        EatGroupController groupController = new EatGroupController(eatGroupRepo);
+        EatGroupController eatGroupController = new EatGroupController(eatGroupRepo);
         List<EatGroup> groupList = new ArrayList<EatGroup>();
         EatGroup group1 = new EatGroup(0, "Javaanse Strijders");
         EatGroup group2 = new EatGroup(1, "PokoLoco");
@@ -58,7 +57,7 @@ class EatGroupControllerTest {
         when(eatGroupRepo.findAll()).thenReturn(groupList);
 
         //When
-        groupController.findAll("");
+        eatGroupController.findAll("");
 
         //Then
         verify(eatGroupRepo).findAll();
@@ -83,12 +82,12 @@ class EatGroupControllerTest {
     @Test
     void testUpdateGroup() throws Exception{
         //Given
-        EatGroupController groupController = new EatGroupController(eatGroupRepo);
+        EatGroupController eatGroupController = new EatGroupController(eatGroupRepo);
         EatGroup eatGroup = new EatGroup(0, "Javaanse Strijders");
         when(eatGroupRepo.findById(0L)).thenReturn(Optional.of(eatGroup));
 
         //When
-        groupController.updateGroup(0L, eatGroup);
+        eatGroupController.updateGroup(0L, eatGroup);
 
         //Then
         verify(eatGroupRepo).save(eatGroup);
@@ -97,12 +96,12 @@ class EatGroupControllerTest {
     @Test
     void testDeleteGroup() throws Exception{
         //Given
-        EatGroupController groupController = new EatGroupController(eatGroupRepo);
+        EatGroupController eatGroupController = new EatGroupController(eatGroupRepo);
         EatGroup group = new EatGroup(0, "Javaanse Strijders");
         when(eatGroupRepo.findById(0L)).thenReturn(Optional.of(group));
 
         //When
-        groupController.deleteGroup(0L);
+        eatGroupController.deleteGroup(0L);
 
         //Then
         verify(eatGroupRepo).delete(group);
