@@ -28,6 +28,10 @@ public class SearchRestaurantsController {
     @Autowired
     private ZomatoTransformer zomatoTransformer;
 
+    public SearchRestaurantsController(SingleRestaurantService singleRestaurantService) {
+        this.singleRestaurantService = singleRestaurantService;
+    }
+
     @GetMapping(produces = "application/json")
     @ResponseBody
     public List<RestaurantTr> findAll() throws Exception {
