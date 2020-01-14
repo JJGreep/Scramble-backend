@@ -7,6 +7,11 @@ public class Cuisine {
 
     private String cuisine_name;
 
+    public Cuisine(String cuisine_id, String cuisine_name) {
+        this.cuisine_id = cuisine_id;
+        this.cuisine_name = cuisine_name;
+    }
+
     public String getCuisine_id() {
         return cuisine_id;
     }
