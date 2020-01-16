@@ -16,6 +16,7 @@ import java.util.List;
 // API endpoints for frontend
 
 @RestController
+@CrossOrigin()
 @RequestMapping(value = "/res", produces = "application/json")
 public class SearchRestaurantsController {
 
