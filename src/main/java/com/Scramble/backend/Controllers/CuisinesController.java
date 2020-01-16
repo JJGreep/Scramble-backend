@@ -15,6 +15,10 @@ public class CuisinesController {
     @Autowired
     private ZomatoService zomatoService;
 
+    public CuisinesController(ZomatoService zomatoService)
+    {
+        this.zomatoService = zomatoService;
+    }
     @GetMapping(produces = "application/json")
     @ResponseBody
     public List<Cuisine> getAllCuisines() {
