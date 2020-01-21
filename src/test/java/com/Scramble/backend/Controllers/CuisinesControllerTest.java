@@ -27,7 +27,7 @@ public class CuisinesControllerTest {
     public MockitoRule mockitoRule = MockitoJUnit.rule();
 
     @Test
-    void getAllCuisines() throws Exception{
+    void getAllCuisinesTest() throws Exception{
         //Given
         CuisinesController cuisinesController = new CuisinesController(zomatoService);
         List<CuisineDetails> cuisineList = new ArrayList<CuisineDetails>();
@@ -35,12 +35,12 @@ public class CuisinesControllerTest {
         CuisineDetails cuisine2 = new CuisineDetails("2", "Chinese");
         cuisineList.add(cuisine1);
         cuisineList.add(cuisine2);
-        when(zomatoService.GetAllCuisines()).thenReturn(cuisineList);
+        when(zomatoService.CallCuisinesAPI()).thenReturn(cuisineList);
 
         //When
         cuisinesController.getAllCuisines();
 
         //Then
-        verify(zomatoService).GetAllCuisines();
+        verify(zomatoService).CallCuisinesAPI();
     }
 }

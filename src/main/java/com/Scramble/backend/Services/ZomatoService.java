@@ -1,15 +1,12 @@
 package com.Scramble.backend.Services;
-<<<<<<< Updated upstream
-=======
-import com.Scramble.backend.Models.Cuisine;
 import com.Scramble.backend.Models.CuisineDetails;
 import com.Scramble.backend.Models.CuisineList;
->>>>>>> Stashed changes
 import com.Scramble.backend.Models.Search;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -51,12 +48,10 @@ public class ZomatoService {
 
     }
 
-<<<<<<< Updated upstream
-=======
-    public List<CuisineDetails> GetAllCuisines() {
+    public List<CuisineDetails> CallCuisinesAPI() throws Exception {
 
-        String url = "https://developers.zomato.com/api/v2.1/cuisines?lat=29.054026&lon=-22.557066";
-
+        String url = "https://developers.zomato.com/api/v2.1/cuisines?lat=51.9139&lon=-3.0938";
+        
         HttpHeaders headers = new HttpHeaders();
         RestTemplate restTemplate = new RestTemplate();
 
@@ -67,12 +62,15 @@ public class ZomatoService {
         HttpEntity<CuisineList> entity = new HttpEntity<>(headers);
 
         ResponseEntity<CuisineList> response = restTemplate.exchange(url, HttpMethod.GET, entity, CuisineList.class);
+        HttpStatus statusCode = response.getStatusCode();
+        System.out.println("Response Status Code: " + statusCode);
 
-        return response.getBody().getCuisines().stream().map(c -> c.getCuisine()).collect(Collectors.toList());
+        if (statusCode == HttpStatus.OK){
+
+            System.out.println("Results found: "+ Objects.requireNonNull(response.getBody()).getCuisines().size());
+            return response.getBody().getCuisines().stream().map(c -> c.getCuisine()).collect(Collectors.toList());
+        }
+        else throw new Exception("Run into Exception: " + statusCode.toString());
     }
-
->>>>>>> Stashed changes
-
-
 
 }

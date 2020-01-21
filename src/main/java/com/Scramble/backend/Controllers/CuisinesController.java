@@ -1,6 +1,5 @@
 package com.Scramble.backend.Controllers;
 
-import com.Scramble.backend.Models.Cuisine;
 import com.Scramble.backend.Models.CuisineDetails;
 import com.Scramble.backend.Services.ZomatoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,7 @@ public class CuisinesController {
     }
     @GetMapping(produces = "application/json")
     @ResponseBody
-    public List<CuisineDetails> getAllCuisines() {
-        return zomatoService.GetAllCuisines();
+    List<CuisineDetails> getAllCuisines() throws Exception {
+        return zomatoService.CallCuisinesAPI();
     }
 }

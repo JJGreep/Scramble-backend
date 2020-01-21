@@ -3,7 +3,7 @@ package com.Scramble.backend.Models;
 import java.util.Objects;
 
 public class Cuisine {
-   private CuisineDetails cuisine;
+    private CuisineDetails cuisine;
 
     public Cuisine() {
     }
