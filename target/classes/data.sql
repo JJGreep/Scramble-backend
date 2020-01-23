@@ -27,6 +27,37 @@ VALUES  ( 1001, 'Javaanse Strijders'),
         ( 2600, 'Brotherly Harmony');
 
 INSERT INTO scrambledb.public.account ("id", "email", "password", "user_name")
-VALUES ( 1, 'test@test.com','******','tester');
+VALUES  ( 1, 'test@test.com','******','tester1'),
+        ( 2, 'test1@test.com','******','tester2'),
+        ( 3, 'test2@test.com','******','tester3'),
+        ( 4, 'test3@test.com','******','tester4'),
+        ( 5, 'test4@test.com','******','tester5');
 INSERT INTO scrambledb.public.account_eat_group ("account_id", "eat_group_id")
-VALUES ( 1,1000 );
+VALUES  ( 1,1000 ),
+        ( 1,1000 ),
+        ( 1,1100 ),
+        ( 1,1100 ),
+        ( 1,1100 ),
+        ( 1,2200 ),
+        ( 1,2200 ),
+        ( 1,2200 ),
+        ( 1,2200 ),
+        ( 1,2200 ),
+        ( 2,2400 ),
+        ( 2,2400 ),
+        ( 2,2400 ),
+        ( 2,2400 ),
+        ( 2,2400 ),
+        ( 2,2400 ),
+        ( 2,2400 ),
+        ( 2,2400 ),
+        ( 2,2400 ),
+        ( 2,2400 ),
+        ( 2,1001),
+        ( 2,1001),
+        ( 2,1001),
+        ( 1,1001),
+        ( 1,1001),
+        ( 1,1001),
+        ( 1,1001),
+        ( 1,1001);
