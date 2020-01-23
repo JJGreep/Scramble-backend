@@ -20,7 +20,7 @@ public class ZomatoService {
         // Url
         //TODO: String Builder for url to include all fields, applying filter information from front-end.
 
-        String url = "https://developers.zomato.com/api/v2.1/search?sort=real_distance&entity_type=zone&count=10&lat=42.054026&lon=-72.557066&radius=1000&order=asc";
+        String url = "https://developers.zomato.com/api/v2.1/search?sort=real_distance&entity_type=zone&count=10&lat=42.054026&lon=-72.557066&radius=1000&sort=real-distance&order=asc";
 
         HttpHeaders headers = new HttpHeaders();
         RestTemplate restTemplate = new RestTemplate();
@@ -40,7 +40,7 @@ public class ZomatoService {
 
         // check status
         if (statusCode == HttpStatus.OK){
-            System.out.println("Results found: " + Objects.requireNonNull(response.getBody()).getResultsShown());
+            System.out.println("Restaurants found: " + Objects.requireNonNull(response.getBody()).getResultsShown());
 
             return response.getBody();
         }
@@ -50,7 +50,7 @@ public class ZomatoService {
 
     public List<CuisineDetails> CallCuisinesAPI() throws Exception {
 
-        String url = "https://developers.zomato.com/api/v2.1/cuisines?lat=51.9139&lon=-3.0938";
+        String url = "https://developers.zomato.com/api/v2.1/cuisines?lat=42.054026&lon=-72.557066";
         
         HttpHeaders headers = new HttpHeaders();
         RestTemplate restTemplate = new RestTemplate();
@@ -67,7 +67,7 @@ public class ZomatoService {
 
         if (statusCode == HttpStatus.OK){
 
-            System.out.println("Results found: "+ Objects.requireNonNull(response.getBody()).getCuisines().size());
+            System.out.println("Cuisines found: "+ Objects.requireNonNull(response.getBody()).getCuisines().size());
             return response.getBody().getCuisines().stream().map(c -> c.getCuisine()).collect(Collectors.toList());
         }
         else throw new Exception("Run into Exception: " + statusCode.toString());
