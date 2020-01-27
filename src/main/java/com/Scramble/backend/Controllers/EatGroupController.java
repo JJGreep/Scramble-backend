@@ -24,7 +24,6 @@ public class EatGroupController {
         this.eatGroupRepo = eatGroupRepo;
     }
 
-
     @GetMapping(value="/all",produces = "application/json")
     public @ResponseBody
     List<EatGroup> findAll(@RequestParam String name){
@@ -68,18 +67,21 @@ public class EatGroupController {
      * @return the response entity
      * @throws RuntimeException the resource not found exception
      */
-    @PutMapping(value= "/updateGroup/{id}")
+    @PutMapping(value= "/updateGroup/{id}", consumes = "application/json", produces = "application/json")
     public ResponseEntity<EatGroup> updateGroup(
-            @PathVariable(value = "id") Long id, @Valid @RequestBody EatGroup groupDetails){
+            @PathVariable(value = "id") Long id,
+            @Valid
+            @RequestBody final EatGroup groupDetails){
         EatGroup group =
                 eatGroupRepo
                         .findById(id)
-                        .orElseThrow(() -> new RuntimeException("Group not found on :: " + id));
+                        .orElseThrow(() -> new RuntimeException("Group not found on: " + id));
         group.setName(groupDetails.getName());
         group.setAccounts(groupDetails.getAccounts());
         final EatGroup updatedGroup = eatGroupRepo.save(group);
         return ResponseEntity.ok(updatedGroup);
     }
+
     /**
      * Delete group map.
      *
@@ -90,10 +92,13 @@ public class EatGroupController {
 
     @DeleteMapping(value="/deleteGroup/{id}")
     public @ResponseBody void deleteGroup(@PathVariable(value = "id") Long id) {
+
         EatGroup group =
                 eatGroupRepo
                         .findById(id)
                         .orElseThrow(() -> new RuntimeException("Group not found on :: " + id));
+
+        //Delete Eatgroup
         eatGroupRepo.delete(group);
     }
 

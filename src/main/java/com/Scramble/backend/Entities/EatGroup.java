@@ -1,6 +1,6 @@
 package com.Scramble.backend.Entities;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,6 +15,7 @@ public class EatGroup {
 
     @Column
     private String name;
+
 
     @ManyToMany(mappedBy = "eatGroups")
     List<Account> accounts;
@@ -72,5 +73,12 @@ public class EatGroup {
                 ", name='" + name + '\'' +
                 ", accounts=" + accounts +
                 '}';
+    }
+
+    @PreRemove
+    private void removeAccountsFromEatGroup(){
+        for (Account a: accounts){
+            a.removeEatGroup(this);
+        }
     }
 }

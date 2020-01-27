@@ -124,4 +124,8 @@ public class Account {
     public void setHistory(List<RestaurantDb> history) {
         this.history = history;
     }
+
+    public void removeEatGroup(EatGroup eatgroup){
+        eatGroups.remove(eatgroup);
+    }
 }
