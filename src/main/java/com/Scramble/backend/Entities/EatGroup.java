@@ -16,9 +16,8 @@ public class EatGroup {
     @Column
     private String name;
 
-
-    @ManyToMany(mappedBy = "eatGroups")
-    List<Account> accounts;
+    @ManyToMany(mappedBy = "eatGroups", cascade = CascadeType.REMOVE)
+    private List<Account> accounts;
 
     public EatGroup(){}
 
