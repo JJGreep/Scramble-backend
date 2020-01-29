@@ -8,7 +8,7 @@ public class RestaurantTr {
     String name;
     String url;
     String cuisines;
-    Integer price_range;
+    Integer average_cost_for_two;
     String photo_url;
 
     public RestaurantTr() {
@@ -47,12 +47,12 @@ public class RestaurantTr {
         this.cuisines = cuisines;
     }
 
-    public Integer getPrice_range() {
-        return price_range;
+    public Integer getAverage_cost_for_two() {
+        return average_cost_for_two;
     }
 
-    public void setPrice_range(Integer price_range) {
-        this.price_range = price_range;
+    public void setAverage_cost_for_two(Integer average_cost_for_two) {
+        this.average_cost_for_two = average_cost_for_two;
     }
 
     public String getPhoto_url() { return photo_url; }
@@ -61,12 +61,12 @@ public class RestaurantTr {
 
 
 
-    public RestaurantTr(String id, String name, String url, String cuisines, Integer price_range, String photo_url) {
+    public RestaurantTr(String id, String name, String url, String cuisines, Integer average_cost_for_two, String photo_url) {
         this.id = id;
         this.name = name;
         this.url = url;
         this.cuisines = cuisines;
-        this.price_range = price_range;
+        this.average_cost_for_two = average_cost_for_two;
         this.photo_url = photo_url;
     }
 
@@ -76,7 +76,7 @@ public class RestaurantTr {
         if (o == null || getClass() != o.getClass()) return false;
         RestaurantTr that = (RestaurantTr) o;
         return Objects.equals(id, that.id) &&
-                price_range == that.price_range &&
+                average_cost_for_two == that.average_cost_for_two &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(url, that.url) &&
                 Objects.equals(cuisines, that.cuisines) &&
@@ -85,6 +85,6 @@ public class RestaurantTr {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, url, cuisines, price_range, photo_url);
+        return Objects.hash(id, name, url, cuisines, average_cost_for_two, photo_url);
     }
 }

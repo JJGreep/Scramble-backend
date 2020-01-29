@@ -29,7 +29,7 @@ class ZomatoTransformerTest {
         restaurant_.setName("McDonalds");
         restaurant_.setCuisines("Italian");
         restaurant_.setUrl("http://example.com");
-        restaurant_.setPriceRange(30);
+        restaurant_.setAverageCostForTwo(30);
         restaurant.setRestaurant(restaurant_);
         restaurants.add(restaurant);
 
