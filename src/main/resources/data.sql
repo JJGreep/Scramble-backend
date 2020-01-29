@@ -25,8 +25,3 @@ VALUES  ( 1001, 'Javaanse Strijders'),
         ( 2400, 'Brothers From Another Mother'),
         ( 2500, 'Sistas from Different Mistas'),
         ( 2600, 'Brotherly Harmony');
-
-INSERT INTO scrambledb.public.account ("id", "email", "password", "user_name")
-VALUES ( 1, 'test@test.com','******','tester');
-INSERT INTO scrambledb.public.account_eat_group ("account_id", "eat_group_id")
-VALUES ( 1,1000 );

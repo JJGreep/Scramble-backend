@@ -7,16 +7,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping(value = "/accounts", produces = "application/json")
 public class AccountController {
 
-    final AccountRepo accountRepo;
+    private final AccountRepo accountRepo;
 
     public AccountController(AccountRepo accountRepo) {
         this.accountRepo = accountRepo;
@@ -27,7 +24,9 @@ public class AccountController {
     @ResponseBody
     public List<Account> findAllAccounts(@RequestParam String userName) {
         if (userName != null && !userName.isEmpty()) {
-            return accountRepo.findByUserName(userName);
+            List<Account> oneAccount = new ArrayList<>();
+            oneAccount.add(accountRepo.findByUserName(userName));
+            return oneAccount;
         } else {
             return accountRepo.findAll();
         }
@@ -91,5 +90,4 @@ public class AccountController {
     }
 
     // TODO: Possibly separate Controllers for History and Favorites, using id from
-    // Account (Sessions?).
 }

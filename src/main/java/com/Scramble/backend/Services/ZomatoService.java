@@ -40,7 +40,7 @@ public class ZomatoService {
 
             return response.getBody();
         }
-        else throw new Exception("Run into Execption: " + statusCode.toString());
+        else throw new Exception("Run into Exception: " + statusCode.toString());
 
     }
 
