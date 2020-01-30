@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import java.util.*;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping(value = "/accounts", produces = "application/json")
 public class AccountController {
 
@@ -44,7 +45,7 @@ public class AccountController {
      * @param account the account
      * @return the account
      */
-    @PostMapping("/accounts")
+    @PostMapping("/createAccount")
     Account createAccount(@Valid @RequestBody Account account) {
         return accountRepo.save(account);
     }
