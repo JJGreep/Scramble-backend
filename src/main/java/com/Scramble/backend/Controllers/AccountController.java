@@ -2,11 +2,9 @@ package com.Scramble.backend.Controllers;
 
 import com.Scramble.backend.Entities.Account;
 import com.Scramble.backend.Models.AccountDto;
-import com.Scramble.backend.Models.AccountTr;
 import com.Scramble.backend.Models.ApiResponse;
 import com.Scramble.backend.Repositories.AccountRepo;
 import com.Scramble.backend.Services.AccountService;
-import com.Scramble.backend.Transformers.AccountTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,8 +22,6 @@ public class AccountController {
 
     private final AccountRepo accountRepo;
 
-    private AccountTransformer accountTransformer;
-
     @Autowired
     private BCryptPasswordEncoder bcryptEncoder;
 
@@ -36,13 +32,13 @@ public class AccountController {
     // TODO: Get Account info with username and password.
     @GetMapping(produces = "application/json")
     @ResponseBody
-    List<AccountTr> findAllAccounts(@RequestParam( required= false) String userName) {
+    List<Account> findAllAccounts(@RequestParam( required= false) String userName) {
         if (userName != null && !userName.isEmpty()) {
-            List<AccountTr> oneAccount = new ArrayList<>();
-            oneAccount.add(accountTransformer.TransformOne(accountRepo.findByUserName(userName)));
+            List<Account> oneAccount = new ArrayList<>();
+            oneAccount.add(accountRepo.findByUserName(userName));
             return oneAccount;
         } else {
-            return accountTransformer.Transform(accountRepo.findAll());
+            return accountRepo.findAll();
         }
     }
 
