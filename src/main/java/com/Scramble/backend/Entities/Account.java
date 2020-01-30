@@ -24,15 +24,15 @@ public class Account {
     private String password;
 
     @JsonBackReference
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.REMOVE)
     @JoinTable(name = "account_eat_group", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "eat_group_id"))
     private List<EatGroup> eatGroups;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.REMOVE)
     @JoinTable(name = "favorites", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "restaurant_id"))
     private List<RestaurantDb> favRestaurantDbs;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.REMOVE)
     @JoinTable(name = "history", joinColumns = @JoinColumn(name = "account_id"), inverseJoinColumns = @JoinColumn(name = "restaurant_id"))
     private List<RestaurantDb> history;
 
