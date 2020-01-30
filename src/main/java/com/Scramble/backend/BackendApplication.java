@@ -40,7 +40,12 @@ public class BackendApplication {
 			user1.setEmail("twaalf@hotmail.com");
 			user1.setPassword(passwordEncoder.encode("twaalf"));
 			userDao.save(user1);
-		};
 
+			Account user2 = new Account();
+			user2.setUserName("drie");
+			user2.setEmail("drie@hotmail.com");
+			user2.setPassword(passwordEncoder.encode("drie"));
+			userDao.save(user2);
+		};
 	}
 }

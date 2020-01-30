@@ -4,6 +4,7 @@ import com.Scramble.backend.Entities.Account;
 import com.Scramble.backend.Repositories.AccountRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -22,7 +23,7 @@ public class AccountController {
     // TODO: Get Account info with username and password.
     @GetMapping(produces = "application/json")
     @ResponseBody
-    List<Account> findAllAccounts(@RequestParam String userName) {
+    List<Account> findAllAccounts(@RequestParam( required= false) String userName) {
         if (userName != null && !userName.isEmpty()) {
             List<Account> oneAccount = new ArrayList<>();
             oneAccount.add(accountRepo.findByUserName(userName));
@@ -31,6 +32,8 @@ public class AccountController {
             return accountRepo.findAll();
         }
     }
+
+
 
     @GetMapping(value = "/{id}", produces = "application/json")
     @ResponseBody
@@ -46,6 +49,9 @@ public class AccountController {
      */
     @PostMapping("/accounts")
     Account createAccount(@Valid @RequestBody Account account) {
+
+
+
         return accountRepo.save(account);
     }
 
@@ -57,6 +63,9 @@ public class AccountController {
      * @return the response entity
      * @throws RuntimeException the resource not found exception
      */
+
+
+
     @PutMapping("/accounts/{id}")
     ResponseEntity<Account> updateAccount(@PathVariable(value = "id") Long id,
                                           @Valid @RequestBody Account accountDetails) {
@@ -89,5 +98,4 @@ public class AccountController {
         return response;
     }
 
-    // TODO: Possibly separate Controllers for History and Favorites, using id from
 }
