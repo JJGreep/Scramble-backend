@@ -1,10 +1,17 @@
 package com.Scramble.backend.Controllers;
 
 import com.Scramble.backend.Entities.Account;
+import com.Scramble.backend.Models.AccountDto;
+import com.Scramble.backend.Models.AccountTr;
+import com.Scramble.backend.Models.ApiResponse;
 import com.Scramble.backend.Repositories.AccountRepo;
+import com.Scramble.backend.Services.AccountService;
+import com.Scramble.backend.Transformers.AccountTransformer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -17,6 +24,11 @@ public class AccountController {
 
     private final AccountRepo accountRepo;
 
+    private AccountTransformer accountTransformer;
+
+    @Autowired
+    private BCryptPasswordEncoder bcryptEncoder;
+
     public AccountController(AccountRepo accountRepo) {
         this.accountRepo = accountRepo;
     }
@@ -24,13 +36,13 @@ public class AccountController {
     // TODO: Get Account info with username and password.
     @GetMapping(produces = "application/json")
     @ResponseBody
-    List<Account> findAllAccounts(@RequestParam( required= false) String userName) {
+    List<AccountTr> findAllAccounts(@RequestParam( required= false) String userName) {
         if (userName != null && !userName.isEmpty()) {
-            List<Account> oneAccount = new ArrayList<>();
-            oneAccount.add(accountRepo.findByUserName(userName));
+            List<AccountTr> oneAccount = new ArrayList<>();
+            oneAccount.add(accountTransformer.TransformOne(accountRepo.findByUserName(userName)));
             return oneAccount;
         } else {
-            return accountRepo.findAll();
+            return accountTransformer.Transform(accountRepo.findAll());
         }
     }
 
@@ -50,11 +62,16 @@ public class AccountController {
      */
     @PostMapping("/createAccount")
     Account createAccount(@Valid @RequestBody Account account) {
-
-
-
-        return accountRepo.save(account);
+        Account newAccount = new Account();
+        newAccount.setUserName(account.getUserName());
+        newAccount.setPassword(bcryptEncoder.encode(account.getPassword()));
+        newAccount.setEmail(account.getEmail());
+        newAccount.setHistory(null);
+        newAccount.setFavRestaurantDbs(null);
+        newAccount.setEatGroups(null);
+        return accountRepo.save(newAccount);
     }
+
 
     /**
      * Update user response entity.
