@@ -60,9 +60,10 @@ public class ZomatoService {
         String host = "developers.zomato.com";
         String path = "/api/v2.1/search";
 
-        String url = uriBuilder.constructUri(scheme, host, path);
-
-
+        String baseUrl = "https://developers.zomato.com/api/v2.1/search";
+        //String url = uriBuilder.constructUri(scheme, host, path);
+        String url = baseUrl + "?lat=" + f.getLat() + "&lon=" + f.getLon() + "&radius=" + f.getRadius() + "&cuisines=" + f.getCuisines() + "&start=" + f.getStart() + "&count=" + f.getCount();
+        System.out.println(url);
         // sets headers
 
         setHeaders().setAccept(Collections.singletonList((MediaType.APPLICATION_JSON)));
@@ -75,6 +76,7 @@ public class ZomatoService {
 
         HttpStatus statusCode = response.getStatusCode();
         System.out.println("Response Status Code: " + statusCode);
+        System.out.println(url);
 
         // check status
         if (statusCode == HttpStatus.OK){
@@ -86,7 +88,7 @@ public class ZomatoService {
     }
 
     public Search CallSearchApiPaginated(Filter f) throws Exception{
-        String scheme = "http";
+        String scheme = "https";
         String host = "developers.zomato.com";
         String path = "/api/v2.1/search";
 
@@ -131,6 +133,8 @@ public class ZomatoService {
         ResponseEntity<CuisineList> response = restTemplate.exchange(url, HttpMethod.GET, entity, CuisineList.class);
         HttpStatus statusCode = response.getStatusCode();
         System.out.println("Response Status Code: " + statusCode);
+
+
 
         if (statusCode == HttpStatus.OK){
 

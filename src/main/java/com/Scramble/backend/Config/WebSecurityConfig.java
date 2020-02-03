@@ -54,7 +54,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements A
 
                 .authorizeRequests()
                 .antMatchers("/*").permitAll()
+                .antMatchers("/res/*").permitAll()
+                .antMatchers("/res/filter/*").permitAll()
                 .antMatchers("/accounts/*").permitAll()
+                .antMatchers("/eatgroup-list").permitAll()
+                .antMatchers("/eatgroup-update/*").permitAll()
                 .antMatchers("/token/*").permitAll()
                 .anyRequest().authenticated()
                 .and()

@@ -17,7 +17,7 @@ import java.util.List;
 // API endpoints for frontend
 
 @RestController
-@CrossOrigin()
+@CrossOrigin(origins = "*")
 @RequestMapping(value = "/res", produces = "application/json")
 public class SearchRestaurantsController {
 
@@ -58,7 +58,7 @@ public class SearchRestaurantsController {
     }
     //TODO: A way to use filter information to apply to Services (Probably in header)
 
-    @PostMapping(value="/filter/{lat}/{lon}/{radius}/{cuisines}")
+    @GetMapping(value="/filter/{lat}/{lon}/{radius}/{cuisines}")
     @ResponseBody
     public List<RestaurantTr> findFiltered(@PathVariable Double lat, @PathVariable Double lon,
                                            @PathVariable Integer radius, @PathVariable String cuisines) throws Exception {

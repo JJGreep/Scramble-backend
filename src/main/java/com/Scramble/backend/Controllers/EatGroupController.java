@@ -6,6 +6,7 @@ import com.Scramble.backend.Models.CreateEatGroup;
 import com.Scramble.backend.Repositories.EatGroupRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 @RequestMapping(value = "/eat_groups", produces = "application/json")
 public class EatGroupController {
 
