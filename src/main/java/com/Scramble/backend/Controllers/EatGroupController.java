@@ -1,5 +1,6 @@
 package com.Scramble.backend.Controllers;
 
+import com.Scramble.backend.Entities.Account;
 import com.Scramble.backend.Entities.EatGroup;
 import com.Scramble.backend.Models.CreateEatGroup;
 import com.Scramble.backend.Repositories.EatGroupRepo;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,6 +55,8 @@ public class EatGroupController {
     @PostMapping(value="/createGroup", consumes = "application/json", produces = "application/json")
     public ResponseEntity<EatGroup> createGroup(@RequestBody final CreateEatGroup createEatGroup) {
         EatGroup eatgroup = new EatGroup();
+        List<Account> accounts = createEatGroup.getAccounts();
+        eatgroup.setAccounts(accounts);
         eatgroup.setName(createEatGroup.getName());
         EatGroup returnedEatGroup = eatGroupRepo.save(eatgroup);
         System.out.println(returnedEatGroup);
