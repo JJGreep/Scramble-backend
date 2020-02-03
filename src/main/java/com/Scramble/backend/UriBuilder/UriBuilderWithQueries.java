@@ -10,14 +10,14 @@ public class UriBuilderWithQueries {
     @Autowired
     private Filter filter;
 
-    public void constructUri() {
+    public String constructUri(String scheme, String host, String path) {
         UriComponents uriComponents = UriComponentsBuilder.newInstance()
-                .scheme("http")
-                .host("developers.zomato.com")
-                .path("/api/v2.1/search")
+                .scheme(scheme)
+                .host(host)
+                .path(path)
                 .query("sort=real_distance&entity_type=zone&order=asc&lat={lat}&lon={lon}&start={start}&count={count}&cuisines={cuisines}&radius={radius}")
                 .buildAndExpand(filter.getLat(), filter.getLon(), filter.getStart(), filter.getCount(), filter.getCuisines(), filter.getRadius());
 
-
+        return uriComponents.toUriString();
     }
 }

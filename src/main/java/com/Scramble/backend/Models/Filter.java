@@ -49,6 +49,30 @@ public class Filter {
         return lon;
     }
 
+    public void setStart(Integer start) {
+        this.start = start;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
+    public void setCuisines(String cuisines) {
+        this.cuisines = cuisines;
+    }
+
+    public void setRadius(Integer radius) {
+        this.radius = radius;
+    }
+
+    public void setLat(Double lat) {
+        this.lat = lat;
+    }
+
+    public void setLon(Double lon) {
+        this.lon = lon;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

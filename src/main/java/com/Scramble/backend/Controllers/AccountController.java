@@ -1,10 +1,15 @@
 package com.Scramble.backend.Controllers;
 
 import com.Scramble.backend.Entities.Account;
+import com.Scramble.backend.Models.AccountDto;
+import com.Scramble.backend.Models.ApiResponse;
 import com.Scramble.backend.Repositories.AccountRepo;
+import com.Scramble.backend.Services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -16,6 +21,9 @@ import java.util.*;
 public class AccountController {
 
     private final AccountRepo accountRepo;
+
+    @Autowired
+    private BCryptPasswordEncoder bcryptEncoder;
 
     public AccountController(AccountRepo accountRepo) {
         this.accountRepo = accountRepo;
@@ -50,11 +58,16 @@ public class AccountController {
      */
     @PostMapping("/createAccount")
     Account createAccount(@Valid @RequestBody Account account) {
-
-
-
-        return accountRepo.save(account);
+        Account newAccount = new Account();
+        newAccount.setUserName(account.getUserName());
+        newAccount.setPassword(bcryptEncoder.encode(account.getPassword()));
+        newAccount.setEmail(account.getEmail());
+        newAccount.setHistory(null);
+        newAccount.setFavRestaurantDbs(null);
+        newAccount.setEatGroups(null);
+        return accountRepo.save(newAccount);
     }
+
 
     /**
      * Update user response entity.
